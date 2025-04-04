@@ -1,0 +1,219 @@
+﻿@model Ont3010_Project_YA2024.Models.InventoryLiaison.Fridge
+
+@{
+    ViewData["Title"] = "Create Fridge";
+    Layout = ViewData["Layout"] as string;
+}
+
+@if (TempData["created"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["created"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["updated"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["updated"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["deleted"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> @TempData["deleted"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-times-circle"></i> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<h1 class="text-center mb-4">
+    <i class="fas fa-plus-square"></i> @ViewData["Title"]
+</h1>
+<hr />
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+
+                <!-- Fridge Details Section -->
+                <h4 class="text-primary mb-4"><i class="fas fa-box"></i> Fridge Details</h4>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ModelType" class="control-label"></label>
+                    <input asp-for="ModelType" class="form-control" placeholder="Enter model type" />
+                    <span asp-validation-for="ModelType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="DoorType" class="control-label"></label>
+                    <input asp-for="DoorType" class="form-control" placeholder="Enter door type" />
+                    <span asp-validation-for="DoorType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Size" class="control-label"></label>
+                    <input asp-for="Size" class="form-control" placeholder="Enter size" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Capacity" class="control-label"></label>
+                    <input asp-for="Capacity" class="form-control" placeholder="Enter capacity" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Condition" class="control-label"></label>
+                    <select asp-for="Condition" class="form-control">
+                        <option value="">Select Condition</option>
+                        <option value="New">New</option>
+                        <option value="Used">Used</option>
+                        <option value="Refurbished">Refurbished</option>
+                        <option value="Damaged">Damaged</option>
+                        <option value="In Repair">In Repair</option>
+                    </select>
+                    <span asp-validation-for="Condition" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SerialNumber" class="control-label"></label>
+                    <input asp-for="SerialNumber" class="form-control" />
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
+                <!-- Supplier Information Section -->
+                <h4 class="text-primary mt-5 mb-4"><i class="fas fa-truck"></i> Supplier Information</h4>
+
+                <div class="form-group mb-3">
+                    <label asp-for="SupplierName" class="control-label"></label>
+                    <input asp-for="SupplierName" class="form-control" placeholder="Enter supplier name" />
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="SupplierContact" class="control-label"></label>
+                    <input asp-for="SupplierContact" class="form-control" placeholder="Enter supplier contact" />
+                    <span asp-validation-for="SupplierContact" class="text-danger"></span>
+                </div>
+
+                <!-- Warranty Section -->
+                <h4 class="text-primary mt-5 mb-4"><i class="fas fa-certificate"></i> Warranty Details</h4>
+
+                <div class="form-group mb-3">
+                    <label asp-for="WarrantyStartDate" class="control-label"></label>
+                    <input asp-for="WarrantyStartDate" class="form-control" type="date" />
+                    <span asp-validation-for="WarrantyStartDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="WarrantyEndDate" class="control-label"></label>
+                    <input asp-for="WarrantyEndDate" class="form-control" type="date" />
+                    <span asp-validation-for="WarrantyEndDate" class="text-danger"></span>
+                </div>
+
+                <!-- Delivery Documentation and Fridge Image Section -->
+                <h4 class="text-primary mt-5 mb-4"><i class="fas fa-file-upload"></i> Upload Documents</h4>
+
+                <div class="form-group mb-3">
+                    <label asp-for="DeliveryDocumentation" class="control-label">Delivery Documentation</label>
+                    <input type="file" name="file" class="form-control" required />
+                    <span asp-validation-for="DeliveryDocumentation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="FridgeImage" class="control-label">Fridge Image</label>
+                    <input type="file" asp-for="FridgeImage" class="form-control" required />
+                    <span asp-validation-for="FridgeImage" class="text-danger"></span>
+                </div>
+
+                <!-- Notes Section -->
+                <div class="form-group mb-3">
+                    <label asp-for="Note" class="control-label"></label>
+                    <textarea asp-for="Note" class="form-control" placeholder="Add additional notes"></textarea>
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="form-group text-center mt-5">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Fridge
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function () {
+            var selectedFile = this.files[0].name;
+            document.getElementById('selectedFile').innerText = selectedFile;
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .text-center {
+            text-align: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            margin-top: 1rem;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+            }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .text-primary {
+            color: #007bff;
+        }
+
+        h4 {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        hr {
+            margin-bottom: 30px;
+        }
+    </style>
+}

@@ -1,0 +1,61 @@
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-fsvez1yfi2] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-fsvez1yfi2] {
+  color: #0077cc;
+}
+
+.btn-primary[b-fsvez1yfi2] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.business-logo[b-fsvez1yfi2] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-fsvez1yfi2] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+.nav-pills .nav-link.active[b-fsvez1yfi2], .nav-pills .show > .nav-link[b-fsvez1yfi2] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.nav-item.active[b-fsvez1yfi2] {
+    border: 3px solid #fff; /* Adjust color and thickness as needed */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.border-top[b-fsvez1yfi2] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-fsvez1yfi2] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-fsvez1yfi2] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-fsvez1yfi2] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-fsvez1yfi2] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

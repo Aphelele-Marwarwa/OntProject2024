@@ -1,0 +1,199 @@
+﻿@model CustomerDashboardViewModel
+@{
+    ViewData["Title"] = "Customer Dashboard";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+        <div class="container-fluid my-4">
+            <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+                <div class="text-center mb-4">
+                    <h1 class="display-4">Dashboard</h1>
+                    <h2>Welcome, @Model.Customer.FirstName @Model.Customer.LastName!</h2>
+                </div>
+            </div>
+
+
+
+            <!-- Dashboard Cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-4">
+                        <div class="card-body">
+                            <i class="fas fa-clipboard-list fa-2x float-right"></i> <!-- Icon for total allocations -->
+                            <h5 class="card-title">Total Allocations</h5>
+                            <p class="card-text">@Model.TotalAllocations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-4">
+                        <div class="card-body">
+                            <i class="fas fa-check fa-2x float-right"></i> <!-- Icon for processed allocations -->
+                            <h5 class="card-title">Processed Allocations</h5>
+                            <p class="card-text">@Model.ProcessedAllocations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger mb-4">
+                        <div class="card-body">
+                            <i class="fas fa-times fa-2x float-right"></i> <!-- Icon for unprocessed allocations -->
+                            <h5 class="card-title">Unprocessed Allocations</h5>
+                            <p class="card-text">@Model.UnprocessedAllocations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph Section -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-chart-bar"></i> Processed vs Unprocessed Allocations
+                        </div>
+                        <div class="card-body">
+                            <canvas id="allocationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Fridge Allocations Section -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <i class="fas fa-truck-loading"></i> Recent Fridge Allocations
+                        </div>
+                        <div class="card-body">
+                            @if (Model.RecentFridgeAllocations.Any())
+                            {
+                                <ul class="list-group">
+                                    @foreach (var allocation in Model.RecentFridgeAllocations)
+                                    {
+                                        <li class="list-group-item">
+                                            <i class="fas fa-warehouse"></i> <!-- Icon for each allocation -->
+                                            <strong>Fridge Type:</strong> @allocation.Fridge.ModelType <br />
+                                            <strong>Allocation Date:</strong> @allocation.AllocationDate.ToShortDateString()
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No recent allocations found.</p>
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <a href="/CustomerAllocation/Index" class="btn btn-primary">
+                                <i class="fas fa-list"></i> View All Allocations
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card mb-4 shadow">
+                <div class="card-header">
+                    <h2 class="mb-0">Customer Reports and Requests</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <!-- Total Reports Created Card -->
+                        <div class="col-md-6">
+                            <div class="card border-primary rounded shadow p-3 mb-3 bg-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Reports Created</h5>
+                                    <h1 class="display-3 text-primary">@ViewData["TotalReportsCreated"]</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total New Fridge Requests Card -->
+                        <div class="col-md-6">
+                            <div class="card border-success rounded shadow p-3 mb-3 bg-white">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total New Fridge Requests</h5>
+                                    <h1 class="display-3 text-success">@ViewData["TotalNewFridgeRequests"]</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            </div>
+    </div>
+</div>
+        <!-- Graph Script -->
+        @section Scripts {
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                var ctx = document.getElementById('allocationChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Processed', 'Unprocessed'],
+                        datasets: [{
+                            label: 'Allocations',
+                            data: [@Model.AllocationGraphData.Processed, @Model.AllocationGraphData.Unprocessed],
+                            backgroundColor: ['#28a745', '#dc3545']
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+    <style>
+        .welcome-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+
+        .notification-list-item {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+            .notification-list-item:last-child {
+                border-bottom: none;
+            }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+        }
+
+        .hover-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and box-shadow */
+        }
+
+            .hover-card:hover {
+                transform: scale(1.05); /* Slightly increase size on hover */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+            }
+    </style>
+        }
+

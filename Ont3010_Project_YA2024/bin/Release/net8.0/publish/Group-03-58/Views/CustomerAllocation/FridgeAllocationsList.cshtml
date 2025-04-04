@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Ont3010_Project_YA2024.Models.CustomerLiaison.FridgeAllocation>
+
+@{
+    ViewData["Title"] = "My Allocations";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml"; // Confirm this layout path
+}
+
+<h2>My Fridge Allocations</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fridge Type</th>
+                <th>Allocation Date</th>
+                <th>Duration</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var allocation in Model)
+            {
+                <tr>
+                    <td>@allocation.Fridge?.ModelType </td>
+                    <td>@allocation.AllocationDate.ToString("yyyy-MM-dd")</td>
+                    <td>@allocation.Duration</td>
+                    <td>
+                        <a asp-action="ViewAllocationDetail" asp-route-id="@allocation.FridgeAllocationId" class="btn btn-info">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>@ViewBag.Message</p>
+}

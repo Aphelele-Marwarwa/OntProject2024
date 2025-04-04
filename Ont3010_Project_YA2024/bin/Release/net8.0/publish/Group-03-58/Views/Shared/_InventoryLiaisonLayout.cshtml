@@ -1,0 +1,216 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+
+
+@inject BusinessService BusinessService
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Admin dashboard for managing fridge allocations and inventory.">
+    <meta name="author" content="Aphelele Marwarwa">
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] -  @ViewBag.BusinessName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom navbar-dark shadow-sm mb-4">
+            <div class="container">
+                <a class="navbar-brand d-flex flex-column align-items-start">
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.BusinessLogo" alt="Business Logo" class="business-logo">
+                        <div class="d-flex flex-column">
+                            <span>@ViewBag.BusinessName</span>
+                            <span class="slogan">@ViewBag.Slogan</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial.cshtml"></partial>
+                    @{
+                        // Cast ViewBag.Notifications to List<Notification>
+                        var notifications = ViewBag.Notifications as List<Ont3010_Project_YA2024.Models.Notification>;
+                    }
+
+                    <!-- Notification Bell -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle notification-bell" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">@ViewBag.UnreadNotificationCount</span> <!-- Unread notifications count -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            @if (notifications != null && notifications.Any()) // Access notifications from ViewBag
+                            {
+                                foreach (var notification in notifications) // Iterate over notifications
+                                {
+                                    <li>
+                                        <a class="dropdown-item"
+                                           style="color: @(notification.IsRead ? "gray" : "white");"
+                                           href="@Url.Action("MarkAsRead", new { id = notification.Id })">
+                                            @notification.Message by @notification.ActionBy <br />
+                                            <small style="color: gray;">@notification.Date.ToString("g")</small>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="dropdown-item" style="color: white;" href="#">No notifications available</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- End Notification Bell -->
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container-fluid">
+        <!-- Wrap sidebar and main content in a container for responsiveness -->
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar" id="sidebarCollapse">
+                <button class="btn btn-primary toggle-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+                    </svg>
+                </button>
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/InventoryLiaison/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="InventoryLiaison" asp-action="Index">
+                            <!-- Dashboard icon -->
+                            <img src="~/images/adminIcons/dashboard.png" width="30" height="30" alt="Dashboard" />
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/Fridge/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="Fridge" asp-action="Index">
+                            <!-- Fridge Management icon -->
+                            <img src="~/images/adminIcons/Fridge.png" width="30" height="30" alt="Stock Taking" />
+                            <span class="text">Stock Taking</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/ScrappedFridge/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="ScrappedFridge" asp-action="Index">
+                            <!-- Supplier Management icon -->
+                            <img src="~/images/InventoryLiaisonIcons/scrap.png" width="30" height="30" alt="Scrap Fridges" />
+                            <span class="text">Scrap Fridges</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/ProcessAllocation/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="ProcessAllocation" asp-action="Index">
+                            <!-- Process Customer Fridge Allocation icon -->
+                            <img src="~/images/InventoryLiaisonIcons/ProcessFridge.png" width="30" height="30" alt="Process Customer Fridge Allocation" />
+                            <span class="text">Process Customer Fridge Allocation</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/PurchaseRequest/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="PurchaseRequest" asp-action="Index">
+                            <!-- Manage Purchase Request icon -->
+                            <img src="~/images/InventoryLiaisonIcons/Purchase.png" width="30" height="30" alt="Manage Purchase Request" />
+                            <span class="text">Manage Purchase Request</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/InventoryLiaisonReport/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="InventoryLiaisonReport" asp-action="Index">
+                            <!-- Reporting and Analytics icon -->
+                            <img src="~/images/adminIcons/Report.png" width="30" height="30" alt="Reporting and Analytics" />
+                            <span class="text">Reporting and Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center text-muted small">
+        <div class="colot">
+            <div class="container">
+                <p>
+                    &copy; @DateTime.Now.Year @ViewBag.BusinessName.  All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            // Function to handle click events on nav links
+            $('.nav-link').click(function () {
+                // Remove 'active' class from all nav items
+                $('.nav-item').removeClass('active');
+
+                // Add 'active' class to the parent 'li.nav-item' of the clicked link
+                $(this).closest('.nav-item').addClass('active');
+            });
+
+            // Set initial active state based on current URL
+            setActiveNavItem();
+
+            // Handle navigation changes (when user navigates to another page)
+            $(document).on('click', 'a.nav-link', function () {
+                // Wait a moment for the browser to start navigating
+                setTimeout(setActiveNavItem, 50);
+            });
+
+            // Function to set active navigation item based on current URL
+            function setActiveNavItem() {
+                var currentUrl = window.location.pathname;
+
+                // Remove 'active' class from all nav items
+                $('.nav-item').removeClass('active');
+
+                // Set 'active' class based on exact URL match
+                $('.nav-item').each(function () {
+                    var href = $(this).find('.nav-link').attr('href');
+
+                    // Ensure href is properly formatted for comparison
+                    var linkPath = new URL(href, window.location.origin).pathname;
+
+                    if (currentUrl === linkPath) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            $('.toggle-btn').click(function () {
+                $('#sidebarCollapse').toggleClass('collapsed');
+                if ($('#sidebarCollapse').hasClass('collapsed')) {
+                    $('.nav-link .text').hide();  // Hide text
+                    $('.nav-link img').show();    // Show icons
+                } else {
+                    $('.nav-link .text').show();  // Show text
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

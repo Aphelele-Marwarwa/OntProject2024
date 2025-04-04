@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Hero Section -->
+<section class="hero text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to the Fridge Management System</h1>
+        <p class="lead">Your comprehensive solution for managing fridge operations efficiently and effectively.</p>
+    </div>
+</section>
+
+<!-- Main Content Section -->
+<section class="py-5 fact ">
+    <div class="container">
+        <div class="row align-items-center bg-custom">
+            <!-- Text Section -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h2 class="display-5 text-white">Streamline Your Fridge Management</h2>
+                <p class="lead text-white">Efficiently manage your fridge inventory, customer allocations, and maintenance with our comprehensive system.</p>
+            </div>
+            <!-- Card Section -->
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <img src ="~/images/adminIcons/Glass-Door-Back-Bar-Freezers-as-Glass-Frosters.png" class="card-img-top" alt="Sample Fridge 1">
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Key Features Section -->
+<section class="py-5 page-home">
+    <div class="container text-center">
+        <h2 class="mb-4 text-white">Key Features</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-box  p-4 bg-white shadow-sm">
+                    <h4>Customer Management</h4>
+                    <p>Manage customer data and fridge allocations seamlessly.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box  p-4 bg-white shadow-sm">
+                    <h4>Inventory Control</h4>
+                    <p>Track fridge stock levels and manage inventory efficiently.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box  p-4 bg-white shadow-sm">
+                    <h4>Fault Reporting</h4>
+                    <p>Report and track faults, and schedule repairs quickly.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box  p-4 bg-white shadow-sm">
+                    <h4>Maintenance Scheduling</h4>
+                    <p>Organize and manage maintenance schedules with ease.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-box  p-4 bg-white shadow-sm">
+                    <h4>Procurement Management</h4>
+                    <p>Streamline procurement processes and supplier interactions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Subsystems Section -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="mb-4 text-white">Explore Our Subsystems</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-2 text-center mb-4">
+                <img src="~/images/CustomerLiaisonIcons/Customer Liaison.png" alt="Customer Management" class="img-fluid">
+                <p class="text-white">Customer Management</p>
+            </div>
+            <div class="col-md-2 text-center mb-4">
+                <img src="~/images/InventoryLiaisonIcons/Inventory Liaison.jpg" alt="Inventory Control" class="img-fluid">
+                <p class="text-white">Inventory Control</p>
+            </div>
+            <div class="col-md-2 text-center mb-4">
+                <img src="~/images/Fault Technician/Fault Technician .png" alt="Fault Reporting" class="img-fluid">
+                <p class="text-white">Fault Reporting</p>
+            </div>
+            <div class="col-md-2 text-center mb-4">
+                <img src="~/images/Maintenance Technician/Maintenance Technician .png" alt="Maintenance Scheduling" class="img-fluid">
+                <p class="text-white">Maintenance Scheduling</p>
+            </div>
+            <div class="col-md-2 text-center mb-4">
+                <img src="~/images/Purchasing Manager/Purchasing Manager.png" alt="Procurement Management" class="img-fluid">
+                <p class="text-white">Procurement Management</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Testimonials Section -->
+<section class="bg-light py-5">
+    <div class="container text-center ">
+        <h2 class="mb-4">What Our Users Say</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <blockquote class="blockquote text-left">
+                    <p class="mb-0">"The Fridge Management System has revolutionized our operations and made managing fridges a breeze."</p>
+
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote text-left">
+                    <p class="mb-0">"An excellent tool for streamlining inventory and fault reporting. Highly recommended!"</p>
+
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-5 text-center bg-dark">
+    <div class="container">
+        <h2 class="mb-4 text-white">Contact Us</h2>
+        <p class="text-white">If you have any questions or need further information, feel free to reach out!</p>
+        <a href="mailto:@ViewBag.ContactEmail" class="btn btn-success btn-lg">Email Support</a>
+    </div>
+</section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<!-- CSS Styles for Enhancement -->
+<style>
+    .page-home .hero {
+       
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.10);
+        background-image: none;
+    }
+
+    .fact .bg-custom {
+        background-color: rgba(255, 255, 255, 0.10); /* Adjust transparency */
+        padding: 20px; /* Adjust padding if needed */
+        border-radius: 8px; /* Optional: Rounded corners */
+    }
+
+    .fact .card-img-top {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .page-home {
+        background-color: rgba(255, 255, 255, 0.10); /* Transparent white background */
+        padding: 20px; /* Adjust padding if needed */
+        border-radius: 10px; /* Optional: Rounded corners */
+    }
+
+    .feature-box {
+        border-radius: 20px; /* Adjust this value for corner radius */
+        background-color: rgba(255, 255, 255, 0.10); /* Slightly less transparent background */
+        padding: 20px; /* Ensure padding is sufficient */
+        transition: box-shadow 0.3s ease; /* Smooth transition for shadow effect */
+    }
+
+        .feature-box:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+    .blockquote {
+        border-left: 5px solid #007bff;
+        padding-left: 1rem;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+</style>

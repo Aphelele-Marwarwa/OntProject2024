@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Ont3010_Project_YA2024.Models.Notification>
+
+@{
+    ViewData["Title"] = "All Notifications";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Adjust layout as needed
+}
+
+<h2>All Notifications</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Action By</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model)
+        {
+            // Check if the user is an employee or a customer
+            var userId = ViewBag.UserId; // Get the user ID from ViewBag
+            var status = notification.EmployeeNotificationStatuses
+            .FirstOrDefault(s => s.EmployeeId == userId) ??
+            notification.EmployeeNotificationStatuses
+            .FirstOrDefault(s => s.CustomerId == userId); // Check for customer notification status
+
+            <tr>
+                <td>@notification.Message</td>
+                <td>@notification.ActionBy</td>
+                <td>@notification.Date.ToString("g")</td>
+                <td>
+                    @if (status != null && status.IsRead)
+                    {
+                        <span class="badge bg-success">Read</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Unread</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

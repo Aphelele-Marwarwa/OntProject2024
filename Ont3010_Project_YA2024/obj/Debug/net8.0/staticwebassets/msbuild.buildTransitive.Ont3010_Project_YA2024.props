@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Ont3010_Project_YA2024.props" />
+</Project>

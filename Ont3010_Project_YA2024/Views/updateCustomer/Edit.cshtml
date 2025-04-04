@@ -1,0 +1,525 @@
+﻿@model Customer
+@using Ont3010_Project_YA2024.Models.CustomerLiaison
+
+@{
+    ViewData["Title"] = "Edit Customer";
+    Layout = "/Views/Shared/_mainLayout.cshtml";
+}
+<div class="customer-details-container">
+    <h1 class="text-center">Edit Customer</h1>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="CustomerId" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="FirstName" class="control-label">
+                                <i class="fas fa-user"></i> First Name
+                            </label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="LastName" class="control-label">
+                                <i class="fas fa-user"></i> Last Name
+                            </label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Title" class="control-label">
+                                <i class="fas fa-briefcase"></i> Title
+                            </label>
+                            <select asp-for="Title" class="form-control" onchange="toggleCustomInput('Title')">
+                                <option value="">Select Title</option>
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Mrs.">Mrs.</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Dr.">Dr.</option>
+                                <option value="Prof.">Prof.</option>
+                                <option value="Rev.">Rev.</option>
+                                <option value="Hon.">Hon.</option>
+                                <option value="Sir">Sir</option>
+                                <option value="Lady">Lady</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input id="TitleCustom" name="TitleCustom" class="form-control custom-input" placeholder="Enter custom title" style="display: none;" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="EmailAddress" class="control-label">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="ProfilePhoto" class="control-label"></label>
+                            <input type="file" asp-for="ProfilePhoto" class="form-control">
+                            @*   <span asp-validation-for="ProfilePhoto" class="text-danger"></span> *@
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="PhoneNumber" class="control-label">
+                                <i class="fas fa-phone"></i> Phone Number
+                            </label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="BusinessRole" class="control-label">
+                                <i class="fas fa-briefcase"></i> Business Role
+                            </label>
+                            <select asp-for="BusinessRole" class="form-control" onchange="toggleCustomInput('BusinessRole')">
+                                <option value="">Select Business Role</option>
+                                <option value="Owner">Owner</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Decision Maker">Decision Maker</option>
+                                <option value="Purchasing Agent">Purchasing Agent</option>
+                                <option value="Facility Manager">Facility Manager</option>
+                                <option value="Procurement Specialist">Procurement Specialist</option>
+                                <option value="Operations Manager">Operations Manager</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input id="BusinessRoleCustom" name="BusinessRoleCustom" class="form-control custom-input" placeholder="Enter custom business role" style="display: none;" />
+                            <span asp-validation-for="BusinessRole" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Business Information</legend>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="BusinessName" class="control-label">
+                                <i class="fas fa-building"></i> Business Name
+                            </label>
+                            <input asp-for="BusinessName" class="form-control" />
+                            <span asp-validation-for="BusinessName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="BusinessEmailAddress" class="control-label">
+                                <i class="fas fa-envelope"></i> Business Email Address
+                            </label>
+                            <input asp-for="BusinessEmailAddress" class="form-control" />
+                            <span asp-validation-for="BusinessEmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="BusinessPhoneNumber" class="control-label">
+                                <i class="fas fa-phone"></i> Business Phone Number
+                            </label>
+                            <input asp-for="BusinessPhoneNumber" class="form-control" />
+                            <span asp-validation-for="BusinessPhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="BusinessType" class="control-label">
+                                <i class="fas fa-cogs"></i> Business Type
+                            </label>
+                            <select asp-for="BusinessType" class="form-control" onchange="toggleCustomInput('BusinessType')">
+                                <option value="">Select Business Type</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Service">Service</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Wholesale">Wholesale</option>
+                                <option value="Distribution">Distribution</option>
+                                <option value="Hospitality">Hospitality</option>
+                                <option value="Food and Beverage">Food and Beverage</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input id="BusinessTypeCustom" name="BusinessTypeCustom" class="form-control custom-input" placeholder="Enter custom business type" style="display: none;" />
+                            <span asp-validation-for="BusinessType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="Industry" class="control-label">
+                                <i class="fas fa-industry"></i> Industry
+                            </label>
+                            <select asp-for="Industry" class="form-control" onchange="toggleCustomInput('Industry')">
+                                <option value="">Select Industry</option>
+                                <option value="Food and Beverage">Food and Beverage</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Hospitality">Hospitality</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Education">Education</option>
+                                <option value="Logistics and Distribution">Logistics and Distribution</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input id="IndustryCustom" name="IndustryCustom" class="form-control custom-input" placeholder="Enter custom industry" style="display: none;" />
+                            <span asp-validation-for="Industry" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Location Information</legend>
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="autocomplete">
+                                <i class="fas fa-map-marker-alt"></i> Address
+                            </label>
+                            <input id="autocomplete" placeholder="Enter your address" type="text" class="form-control" />
+                            <span id="addressError" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="StreetAddress" class="control-label">
+                                <i class="fas fa-road"></i> Street Address
+                            </label>
+                            <input asp-for="StreetAddress" class="form-control" />
+                            <span asp-validation-for="StreetAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="City" class="control-label">
+                                <i class="fas fa-city"></i> City
+                            </label>
+                            <input asp-for="City" class="form-control" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="PostalCode" class="control-label">
+                                <i class="fas fa-postcode"></i> Postal Code
+                            </label>
+                            <input asp-for="PostalCode" class="form-control" />
+                            <span asp-validation-for="PostalCode" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Province" class="control-label">
+                                <i class="fas fa-globe"></i> Province
+                            </label>
+                            <input asp-for="Province" class="form-control" />
+                            <span asp-validation-for="Province" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label asp-for="Country" class="control-label">
+                                <i class="fas fa-flag"></i> Country
+                            </label>
+                            <input asp-for="Country" class="form-control" />
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a asp-controller="CustomerCon" asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Function to clear input fields
+            $('#clearBtn').click(function () {
+                // Clear the values of input fields
+                $('#autocomplete').val('');
+                $('#StreetAddress').val('');
+                $('#City').val('');
+                $('#PostalCode').val('');
+                $('#Province').val('');
+                $('#Country').val('');
+                $('#FirstName').val('');
+                $('#LastName').val('');
+                $('#Title').val('');
+                $('#EmailAddress').val('');
+                $('#PhoneNumber').val('');
+                $('#BusinessRole').val('');
+                $('#BusinessName').val('');
+                $('#BusinessEmailAddress').val('');
+                $('#BusinessPhoneNumber').val('');
+                $('#BusinessType').val('');
+                $('#Industry').val('');
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('select').on('change', function () {
+                var selectId = $(this).attr('id');
+                var $customInput = $('#' + selectId + 'Custom');
+
+                if ($(this).val() === 'Other') {
+                    $customInput.show().focus();
+                } else {
+                    $customInput.hide().val('');
+                }
+            });
+
+            // Initialize custom inputs based on current selection
+            $('select').each(function () {
+                var selectId = $(this).attr('id');
+                var $customInput = $('#' + selectId + 'Custom');
+
+                if ($(this).val() === 'Other') {
+                    $customInput.show();
+                } else {
+                    $customInput.hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('select').on('change', function () {
+                var selectId = $(this).attr('id');
+                var $customInput = $('#' + selectId + 'Custom');
+
+                if ($(this).val() === 'Other') {
+                    $customInput.show().focus();
+                } else {
+                    $customInput.hide().val('');
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        function initAutocomplete() {
+            var autocomplete = new google.maps.places.Autocomplete(
+                $('#autocomplete')[0], {
+                types: ['address']
+            }
+            );
+
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    console.error("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // Clear previous values
+                $('#StreetAddress').val('');
+                $('#City').val('');
+                $('#Province').val('');
+                $('#PostalCode').val('');
+                $('#Country').val('');
+
+                // Extract address components
+                var addressComponents = place.address_components;
+
+                // Initialize variables
+                var streetNumber = '';
+                var route = '';
+                var city = '';
+                var province = '';
+                var postalCode = '';
+                var country = '';
+
+                // Loop through address components to find and assign values
+                $.each(addressComponents, function (index, component) {
+                    var componentType = component.types[0];
+                    switch (componentType) {
+                        case 'street_number':
+                            streetNumber = component.long_name;
+                            break;
+                        case 'route':
+                            route = component.long_name;
+                            break;
+                        case 'locality':
+                            city = component.long_name;
+                            break;
+                        case 'administrative_area_level_1':
+                            province = component.long_name;
+                            break;
+                        case 'postal_code':
+                            postalCode = component.long_name;
+                            break;
+                        case 'country':
+                            country = component.long_name;
+                            break;
+                    }
+                });
+
+                // Combine street number and route (street name)
+                var streetAddress = $.trim(streetNumber + ' ' + route);
+
+                // Set the form fields
+                $('#StreetAddress').val(streetAddress);
+                $('#City').val(city);
+                $('#Province').val(province);
+                $('#PostalCode').val(postalCode);
+                $('#Country').val(country);
+            });
+        }
+    </script>
+
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYN5T43zT4fm2KL3X24qg7aZFQA2zExM4&libraries=places&callback=initAutocomplete" async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Add custom styles for the form */
+        .customer-details-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            padding: 10px;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group.row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.25rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            border-radius: 0.3rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        /* Ensure that the columns take up half of the row */
+        .form-group.col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        fieldset {
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #f8f9fa;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #007bff;
+            padding: 0 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            background-color: #e9ecef;
+        }
+
+        .form-group.row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+
+        .btn-lg {
+            padding: 0.75rem 1.25rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            border-radius: 0.3rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        /* Ensure that the columns take up half of the row */
+        .form-group.col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        /* Ensure that the buttons are spaced out */
+        .btn.mx-2 {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .btn-lg {
+            font-size: 1rem;
+        }
+
+    </style>
+}
+
+
+
+

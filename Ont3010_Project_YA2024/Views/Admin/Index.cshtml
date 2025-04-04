@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "Administrator Homepage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+        <div class="container-fluid my-4">
+            <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+                <div class="text-center mb-4">
+                    <h1 class="display-4">Administrator Dashboard</h1>
+                    <p class="lead">Welcome, @Model.FirstName @Model.LastName!</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row mb-4">
+                <div class="col-lg-12">
+                    <div class="btn-group" role="group" aria-label="Quick Actions">
+                        <a href="@Url.Action("Index", "Employee")" class="btn btn-primary">Manage Employees</a>
+                        <a href="@Url.Action("Index", "Customer")" class="btn btn-primary">Manage Customer</a>
+                        <a href="@Url.Action("Index", "Fridge")" class="btn btn-secondary">Manage Fridges</a>
+                        @*    <a href="@Url.Action("Index", "FridgeAllocations")" class="btn btn-success">Manage Allocations</a> *@
+                        <a href="@Url.Action("Index", "AdminReporting")" class="btn btn-info">View Reports</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-primary shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-primary">Total Employee</h5>
+                            <h3 class="card-text display-4">@Model.TotalEmployees</h3>
+                            <i class="fas fa-users fa-2x text-primary"></i>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card bg-light border-primary shadow-sm">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Total Customers</h4>
+                            <h3 class="card-text display-4">@Model.TotalCustomers</h3>
+                            <i class="fas fa-user-friends fa-2x text-primary"></i>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-danger shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Pending Allocations</h5>
+                            <h3 class="card-text display-4">@Model.PendingAllocations</h3>
+                            <i class="fas fa-clock fa-2x text-danger"></i>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-primary shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-primary">Total Fridges</h5>
+                            <h3 class="card-text display-4">@Model.TotalFridges</h3>
+                            <i class="fas fa-box fa-2x text-primary"></i>
+                            <p class="text-muted">Total number of fridges in inventory.</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-success shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-success">Fridges in Stock</h5>
+                            <h3 class="card-text display-4">@Model.FridgesInStock</h3>
+                            <i class="fas fa-check-circle fa-2x text-success"></i>
+                            <p class="text-muted">Number of fridges currently in stock.</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-danger shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-danger">Fridges Scrapped</h5>
+                            <h3 class="card-text display-4">@Model.FridgesScrapped</h3>
+                            <i class="fas fa-trash-alt fa-2x text-danger"></i>
+                            <p class="text-muted">Number of fridges marked as scrapped.</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card bg-light border-info shadow-sm">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Processed Allocations</h4>
+                            <h2 class="card-text text-info">@ViewData["TotalProcessedAllocations"]</h2>
+                            <i class="fas fa-check-circle fa-2x text-info"></i>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card border-info shadow-sm rounded-lg">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-info">Total Purchase Requests</h5>
+                            <h3 class="card-text display-4">@Model.TotalPurchaseRequests</h3>
+                            <i class="fas fa-shopping-cart fa-2x text-info"></i>
+                            <p class="text-muted">Total number of purchase requests.</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">Last updated: @Model.LastUpdated</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="mb-4">Key Metrics Overview</h2>
+                    <canvas id="metricsChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .welcome-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .btn-group .btn {
+            margin-right: 10px;
+        }
+
+        .notification-list-item {
+            border-bottom: 1px solid #dee2e6;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+            .notification-list-item:last-child {
+                border-bottom: none;
+            }
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+        var ctx = document.getElementById('metricsChart').getContext('2d');
+        var metricsChart = new Chart(ctx, {
+            type: 'bar', // You can also use 'line', 'pie', etc.
+            data: {
+                labels: ['Total Customers', 'Total Fridges', 'Fridges in Stock', 'Pending Allocations'],
+                datasets: [{
+                    label: 'Key Metrics',
+                    data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Metrics)),
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+}

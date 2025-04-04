@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Customer Liaison Reports";
+    Layout = "~/Views/Shared/_CustomerLiaisonLayout.cshtml";
+    var startDate = ViewData["StartDate"]?.ToString();
+    var endDate = ViewData["EndDate"]?.ToString();
+    var pieChartLabels = ViewBag.PieChartLabels as string[];
+    var pieChartValues = ViewBag.PieChartValues as int[];
+}
+
+<!-- Index.cshtml -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="contain">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="contain">
+        <form method="get" action="@Url.Action("Index", "CustomerLiaisonReporting")">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" value="@startDate" />
+                </div>
+                <div class="col-md-4">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" value="@endDate" />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("DownloadCustomerReportPDF", "CustomerLiaisonReporting", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Customer Report (PDF)</a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("DownloadCustomerReportEXCL", "CustomerLiaisonReporting", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Customer Report (Excel)</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="contain">
+        <div class="row chart-container">
+            <!-- Apply custom class for top margin -->
+            <div class="col-md-6">
+                <canvas id="customerChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <input type="hidden" id="chartBase64" name="chartBase64" />
+                <button id="downloadChart" class="btn btn-primary custom-btn mt-3">Download Bar Chart (PNG)</button>
+            </div>
+            <div class="col-md-6">
+                <canvas id="customerPieChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadPieChart" class="btn btn-primary custom-btn mt-3">Download Pie Chart (PNG)</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('customerChart').getContext('2d');
+            var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+            var values = @Html.Raw(Json.Serialize(ViewBag.ChartValues));
+
+            if (labels.length === 0 || values.length === 0) {
+                alert("No data available for the selected date range.");
+                return;
+            }
+
+            var customerReportChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Customers',
+                        data: values,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Function to download chart as PNG
+            document.getElementById('downloadChart').addEventListener('click', function () {
+                var tempCanvas = document.createElement('canvas');
+                var tempCtx = tempCanvas.getContext('2d');
+
+                tempCanvas.width = ctx.canvas.width;
+                tempCanvas.height = ctx.canvas.height;
+
+                tempCtx.fillStyle = 'white';
+                tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+                tempCtx.drawImage(ctx.canvas, 0, 0);
+
+                var chartBase64 = tempCanvas.toDataURL('image/png');
+
+                var link = document.createElement('a');
+                link.href = chartBase64;
+                link.download = 'CustomerReportChart.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+
+        const ctxPie = document.getElementById('customerPieChart').getContext('2d');
+        const customerPieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: @Html.Raw(Json.Serialize(pieChartLabels)),
+                datasets: [{
+                    label: 'Customer Types',
+                    data: @Html.Raw(Json.Serialize(pieChartValues)),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Function to download pie chart as PNG
+        document.getElementById('downloadPieChart').addEventListener('click', function () {
+            var pieChartBase64 = ctxPie.canvas.toDataURL('image/png');
+            var link = document.createElement('a');
+            link.href = pieChartBase64;
+            link.download = 'CustomerPieChart.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <style>
+        .chart-container {
+            margin-top: 20px; /* Adjust the value as needed */
+        }
+
+        .contain {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+}

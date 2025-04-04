@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5; /* Light gray for background */
+        color: #333; /* Dark gray for main text */
+        margin: 0;
+        padding: 0;
+    }
+
+    .privacy-container {
+        background-color: #ffffff; /* White background for content */
+        padding: 30px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+        transition: transform 0.3s;
+    }
+
+        .privacy-container:hover {
+            transform: scale(1.01); /* Slight scale on hover */
+        }
+
+    h1, h2, h3 {
+        color: #004085; /* Soft navy blue for headers */
+        margin-bottom: 10px;
+    }
+
+    ul {
+        color: #555; /* Dark gray for list items */
+    }
+
+    .privacy-section {
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+        padding-bottom: 15px;
+    }
+
+        .privacy-section:last-child {
+            border-bottom: none; /* Remove border from last section */
+        }
+
+        .privacy-section h3 {
+            margin-top: 10px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+            .privacy-section h3:hover {
+                color: #0056b3; /* Slightly brighter blue on hover */
+            }
+
+        .privacy-section p, .privacy-section ul {
+            margin-top: 5px;
+            display: none;
+        }
+
+        .privacy-section.active p,
+        .privacy-section.active ul {
+            display: block; /* Show content when section is active */
+        }
+
+    a {
+        color: #0056b3; /* Muted blue for links */
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+
+<div class="privacy-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>Your privacy is important to us. This Privacy Policy outlines how we collect, use, disclose, and safeguard your information when you use the Fridge Management System. By using our system, you agree to the collection and use of information in accordance with this policy.</p>
+
+    <div class="privacy-section">
+        <h2>Information We Collect</h2>
+
+        <h3>Personal Information</h3>
+        <p>We may collect personal information that you provide directly to us, including but not limited to your name, email address, phone number, and any other information you provide when you contact us or use our services.</p>
+
+        <h3>Usage Data</h3>
+        <p>We may collect information on how you access and use the system, such as your IP address, browser type, pages visited, and the time and date of your visits. This information helps us understand how our system is used and improve our services.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2>How We Use Your Information</h2>
+        <p>We use the information we collect to:</p>
+        <ul>
+            <li>Provide and maintain our services</li>
+            <li>Improve our system and user experience</li>
+            <li>Respond to your inquiries and support requests</li>
+            <li>Send you updates and notifications related to our services</li>
+            <li>Monitor and analyze usage and trends</li>
+        </ul>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Data Protection</h2>
+        <p>We implement reasonable security measures to protect your information from unauthorized access, use, or disclosure. Despite our efforts, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Sharing Your Information</h2>
+        <p>We do not sell, trade, or otherwise transfer your personal information to outside parties except in the following circumstances:</p>
+        <ul>
+            <li><strong>Service Providers:</strong> We may share your information with third-party service providers who assist us in operating our system and delivering our services, provided they agree to keep the information confidential.</li>
+            <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities.</li>
+            <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or any form of sale of some or all of our assets, your information may be transferred as part of that transaction.</li>
+        </ul>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Your Choices</h2>
+        <h3>Access and Correction</h3>
+        <p>You have the right to access and update your personal information. If you need to make changes, please contact us through the contact information provided on our Contact page.</p>
+
+        <h3>Opt-Out</h3>
+        <p>You may opt out of receiving marketing communications from us by following the instructions in those communications or contacting us directly. However, we may still send you essential communications related to our services.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Cookies and Tracking Technologies</h2>
+        <p>We use cookies and similar tracking technologies to enhance your experience on our system. You can set your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some features of our system.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:@ViewBag.ContactEmail">@ViewBag.ContactEmail</a></li>
+            <li><strong>Address:</strong> <br>  @ViewBag.Street <br> @ViewBag.City, @ViewBag.StateProvince <br>  @ViewBag.Country</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle the accordion effect
+    document.querySelectorAll('.privacy-section').forEach(section => {
+        const header = section.querySelector('h2');
+        header.addEventListener('click', () => {
+            section.classList.toggle('active');
+        });
+    });
+</script>

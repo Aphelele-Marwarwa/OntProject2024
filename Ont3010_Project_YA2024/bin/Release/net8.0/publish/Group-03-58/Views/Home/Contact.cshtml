@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<div class="contact-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>If you have any questions, concerns, or would like more information about the Fridge Management System, please feel free to reach out to us. We are here to assist you and ensure your experience with our system is smooth and effective.</p>
+
+    <h2>Contact Information</h2>
+
+    <p><strong>Address:</strong></p>
+    <p>
+        @ViewBag.Street,<br>
+        @ViewBag.City,<br>
+        @ViewBag.StateProvince,<br>
+        @ViewBag.Country
+    </p>
+    <p><strong>Phone:</strong></p>
+    <p>@ViewBag.ContactPhone</p>
+
+    <p><strong>Email:</strong></p>
+    <p><a href="mailto:@ViewBag.ContactEmail">@ViewBag.ContactEmail</a></p>
+
+    <h2>Customer Support</h2>
+    <p>Our customer support team is available to help you with any issues or questions you may have. Please reach out to us during our business hours:</p>
+    <ul>
+        <li><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</li>
+        <li><strong>Saturday:</strong> 10:00 AM - 4:00 PM</li>
+        <li><strong>Sunday:</strong> Closed</li>
+    </ul>
+
+    <h2>Contact Form</h2>
+    <p>If you prefer, you can also use the form below to send us a message directly:</p>
+
+    <form asp-action="Submit" asp-controller="Home" method="post">
+        <fieldset>
+            <legend>Contact Form</legend>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </fieldset>
+    </form>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .contact-container {
+            background-color: rgba(0, 0, 0, 0.8); /* Darker semi-transparent background for better readability */
+            color: white;
+            padding: 30px; /* Increased padding for a more spacious look */
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 20px auto; /* Centered with some margin for better alignment */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+        }
+
+            .contact-container h1, .contact-container h2 {
+                color: #ffffff; /* White headings for clear contrast */
+                margin-bottom: 20px; /* Space below headings */
+            }
+
+            .contact-container p, .contact-container ul {
+                color: #ffffff; /* White text for readability */
+                line-height: 1.6; /* Increased line height for better readability */
+            }
+
+            .contact-container a {
+                color: #66b3ff; /* Link color */
+                text-decoration: none;
+            }
+
+                .contact-container a:hover {
+                    text-decoration: underline; /* Underline on hover for better visibility */
+                }
+
+        .form-group {
+            margin-bottom: 20px; /* Increased margin for better spacing */
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px; /* Slightly increased padding for comfort */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            box-sizing: border-box; /* Ensures padding is included in width */
+        }
+
+        .contact-container .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            padding: 12px 20px; /* Increased padding for a more prominent button */
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold; /* Bold text for emphasis */
+            transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+       .contact-container .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        fieldset {
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            padding: 20px; /* Increased padding for better layout */
+            margin-top: 20px; /* Increased margin for spacing */
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background for contrast */
+        }
+
+        legend {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.2em; /* Slightly larger font for emphasis */
+            padding-bottom: 10px; /* Space below the legend */
+        }
+
+        ul {
+            padding-left: 20px; /* Indent list items for better alignment */
+        }
+    </style>
+}

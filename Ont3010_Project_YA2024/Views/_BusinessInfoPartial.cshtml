@@ -1,0 +1,18 @@
+﻿@{
+    var businessName = ViewData["BusinessName"] ?? "Default Name";
+    var contactEmail = ViewData["ContactEmail"] ?? "default@example.com";
+    var contactPhone = ViewData["ContactPhone"] ?? "000-000-0000";
+    var address = ViewData["Address"] ?? "Default Address";
+    var slogan = ViewData["Slogan"] ?? "Your business slogan goes here.";
+    var businessLogo = ViewData["BusinessLogo"] ?? "/path/to/default/logo.png";
+    var coverPhoto = ViewData["CoverPhoto"] ?? "/path/to/default/cover/photo.jpg";
+}
+
+<div class="business-info">
+    <img src="@businessLogo" alt="Business Logo" />
+    <h1>@businessName</h1>
+    <p>@slogan</p>
+    <p>Email: @contactEmail</p>
+    <p>Phone: @contactPhone</p>
+    <p>Address: @address</p>
+</div>

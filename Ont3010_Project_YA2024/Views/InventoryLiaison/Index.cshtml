@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Inventory Liaison Dashboard";
+    Layout = "~/Views/Shared/_InventoryLiaisonLayout.cshtml";
+}
+
+<div class="contain mt-5">
+    <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+        <!-- Welcome Section -->
+        <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+            <div class="text-center mb-4">
+                <h1 class="display-4">Welcome to the Inventory Liaison Dashboard</h1>
+                <p class="lead text-muted">Hello, @Model.FirstName @Model.LastName! Let's manage your inventory efficiently.</p>
+            </div>
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="row mb-4 text-center">
+            <div class="col">
+                <a href="@Url.Action("Index", "Fridge")" class="btn btn-primary btn-lg rounded-pill me-3">View Stock</a>
+                <a href="@Url.Action("Index", "ProcessAllocation")" class="btn btn-secondary btn-lg rounded-pill">View Allocation Requests</a>
+            </div>
+        </div>
+
+        <!-- Key Metrics Section -->
+        <div class="row g-4 mb-4">
+            @foreach (var metric in new[]
+            {
+            new { Title = "Total Fridges", Count = Model.TotalFridges, Color = "#007bff", Icon = "fas fa-box" },
+            new { Title = "Fridges in Stock", Count = Model.FridgesInStock, Color = "#28a745", Icon = "fas fa-check-circle" },
+            new { Title = "Fridges Scrapped", Count = Model.FridgesScrapped, Color = "#dc3545", Icon = "fas fa-times-circle" },
+            new { Title = "Total Purchase Requests", Count = Model.TotalPurchaseRequests, Color = "#17a2b8", Icon = "fas fa-file-alt" },
+            new { Title = "Processed Allocations", Count = Model.ProcessedAllocations, Color = "#ffc107", Icon = "fas fa-check-double" }
+            })
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="tile" style="background-color: @metric.Color; color: white; border-radius: 10px; padding: 20px; text-align: center;">
+                        <div class="icon" style="font-size: 40px;">
+                            <i class="@metric.Icon"></i>
+                        </div>
+                        <h3 class="mt-3">@metric.Title</h3>
+                        <h2 class="mb-0">@metric.Count</h2>
+                        <p class="small">Last updated: @Model.LastUpdated</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="card shadow-sm rounded">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Fridge Allocations Overview</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="fridgeAllocationsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card shadow-sm rounded">
+                    <div class="card-header bg-warning text-white">
+                        <h5 class="mb-0">Fridges In Stock vs Fridges Scrapped</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="fridgeStockScrappedChart" class="chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm rounded-lg">
+                    <div class="card-header bg-warning text-white">
+                        <h5 class="card-title mb-0">Fridges In Stock vs Fridges Scrapped vs Fridges Allocated</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="fridgeStockScrappedAllocatedChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fridge Allocations Chart
+        var ctx2 = document.getElementById('fridgeAllocationsChart').getContext('2d');
+        var fridgeAllocationsChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Processed', 'Pending'],
+                datasets: [{
+                    label: 'Fridge Allocations Status',
+                    data: [@Model.ProcessedAllocations, @Model.PendingAllocations],
+                    backgroundColor: ['#17a2b8', '#ffc107'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Fridges In Stock vs Fridges Scrapped Chart (Pie Chart)
+        var ctxStockScrapped = document.getElementById('fridgeStockScrappedChart').getContext('2d');
+        var fridgeStockScrappedChart = new Chart(ctxStockScrapped, {
+            type: 'pie',
+            data: {
+                labels: ['Fridges In Stock', 'Fridges Scrapped'],
+                datasets: [{
+                    label: 'Fridges Overview',
+                    data: [@Model.FridgesInStock, @Model.FridgesScrapped],
+                    backgroundColor: ['#28a745', '#dc3545'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+
+        // Fridges In Stock vs Fridges Scrapped vs Fridges Allocated Chart
+        var ctxStockScrappedAllocated = document.getElementById('fridgeStockScrappedAllocatedChart').getContext('2d');
+        var fridgeStockScrappedAllocatedChart = new Chart(ctxStockScrappedAllocated, {
+            type: 'bar',
+            data: {
+                labels: ['Fridges In Stock', 'Fridges Scrapped', 'Fridges Allocated'],
+                datasets: [{
+                    label: 'Number of Fridges',
+                    data: [@Model.FridgesInStock, @Model.FridgesScrapped, @Model.FridgesAllocated],
+                    backgroundColor: ['#28a745', '#dc3545', '#17a2b8'],
+                    borderColor: ['#28a745', '#dc3545', '#17a2b8'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+<style>
+    /* Custom UX-focused CSS */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    .welcome-card {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+    }
+
+    .contain {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    header {
+        margin-bottom: 40px;
+    }
+
+    .tile {
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+    }
+
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .icon {
+        margin-bottom: 10px;
+    }
+
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 1.1rem;
+    }
+
+    .alert {
+        border-radius: 5px;
+    }
+
+    /* Chart styles */
+    canvas {
+        height: 300px !important; /* Ensures charts are visually appealing */
+    }
+</style>

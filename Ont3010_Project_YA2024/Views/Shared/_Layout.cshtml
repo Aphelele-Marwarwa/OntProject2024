@@ -1,0 +1,132 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+@inject BusinessService BusinessService
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] - @ViewBag.BusinessName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+<body style="background-image: url('@ViewBag.CoverPhoto'); background-size: cover;
+ background-position: center;">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom navbar-dark shadow-sm mb-4">
+            <div class="container">
+                <a class="navbar-brand d-flex flex-column align-items-start" >
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.BusinessLogo" alt="Business Logo" class="business-logo">
+                        <div class="d-flex flex-column">
+                            <span>@ViewBag.BusinessName</span>
+                            <span class="slogan">@ViewBag.Slogan</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/Index" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/About" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/Contact" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                        </li>
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/FAQs" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="FAQs">FAQs</a>
+                        </li>
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/Products" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Products">Products</a>
+                        </li>
+                        <li class="nav-item ms-3 @(Context.Request.Path == "/Home/Services" ? "active" : "")">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Services">Services</a>
+                        </li>
+                        <li class="nav-item ms-3">
+                            <a class="btn btn-primary" id="login" asp-area="Identity" asp-page="/Account/Login">
+                                <i class="fa-solid fa-sign-in-alt"></i> Login
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="col-md-9 main-content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="footer text-center text-muted small">
+        <div class="colot">
+            <div class="container">
+                <p>
+                    &copy; @DateTime.Now.Year @ViewBag.BusinessName.  All rights reserved.<br>
+                    Contact us: <a href="mailto:@ViewBag.ContactEmail">@ViewBag.ContactEmail</a> | @ViewBag.ContactPhone<br>
+                    @ViewBag.Address<br>
+                    <a asp-area="" asp-controller="Home" asp-action="TermsOfService">Terms of Service</a> |
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            // Set initial active state based on current URL
+            setActiveNavItem();
+
+            // Function to set active navigation item based on current URL
+            function setActiveNavItem() {
+                var currentUrl = window.location.pathname.toLowerCase();
+
+                // Remove 'active' class from all nav items
+                $('.nav-item').removeClass('active');
+
+                // Set 'active' class based on current URL
+                $('.nav-item').each(function () {
+                    var href = $(this).find('.nav-link').attr('href').toLowerCase();
+                    if (currentUrl === href) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+        });
+
+
+        $(document).ready(function () {
+            $('.toggle-btn').click(function () {
+                $('#sidebarCollapse').toggleClass('collapsed');
+                if ($('#sidebarCollapse').hasClass('collapsed')) {
+                    $('.nav-link .text').hide();  // Hide text
+                    $('.nav-link img').show();    // Show icons
+                } else {
+                    $('.nav-link .text').show();  // Show text
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

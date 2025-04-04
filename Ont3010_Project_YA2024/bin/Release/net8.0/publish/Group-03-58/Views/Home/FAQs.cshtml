@@ -1,0 +1,187 @@
+﻿@{
+    ViewData["Title"] = "FAQs";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
+    .faq-container {
+        background-color: #1a1a1a; /* Darker background for contrast */
+        padding: 40px;
+        border-radius: 12px;
+        color: #f1f1f1;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #00aaff;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        color: #00cc88;
+        margin-bottom: 20px;
+    }
+
+    .faq-section {
+        margin-bottom: 25px;
+    }
+
+    .faq-card {
+        background-color: #2a2a2a; /* Card style for each FAQ */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        margin-bottom: 15px;
+        transition: background-color 0.3s ease;
+    }
+
+        .faq-card:hover {
+            background-color: #333333;
+        }
+
+        .faq-card h3 {
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #00cc88;
+            margin: 0;
+            position: relative;
+        }
+
+            .faq-card h3::after {
+                content: '\f107'; /* FontAwesome down arrow icon */
+                font-family: "FontAwesome";
+                position: absolute;
+                right: 10px;
+                transition: transform 0.3s ease;
+            }
+
+        .faq-card.active h3::after {
+            transform: rotate(180deg); /* Rotate icon when active */
+        }
+
+    .faq-content {
+        display: none;
+        margin-top: 15px;
+        font-size: 1rem;
+        line-height: 1.6;
+        padding-left: 15px;
+        color: #d1d1d1;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .faq-card.active .faq-content {
+        display: block;
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+        ul li {
+            margin-bottom: 10px;
+            color: #d1d1d1;
+        }
+
+    /* Accent button style */
+    .accent-button {
+        background-color: #00cc88;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+        .accent-button:hover {
+            background-color: #00a366;
+        }
+</style>
+
+<div class="faq-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>Welcome to our Frequently Asked Questions (FAQs) page. Here you will find answers to some of the most common questions about the Fridge Management System.</p>
+
+    <!-- General Questions Section -->
+    <div class="faq-section">
+        <h2>General Questions</h2>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">What is the Fridge Management System?</h3>
+            <div class="faq-content">
+                <p>The Fridge Management System is a platform designed to streamline fridge management operations...</p>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">Who can use the Fridge Management System?</h3>
+            <div class="faq-content">
+                <p>This system is designed for beverage companies like Customer Liaison, Service Technicians, and more.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Features Section -->
+    <div class="faq-section">
+        <h2>System Features</h2>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">What are the key features of the system?</h3>
+            <div class="faq-content">
+                <ul>
+                    <li><strong>Customer Management:</strong> Manage customer data and fridge allocations efficiently.</li>
+                    <li><strong>Inventory Control:</strong> Track fridge inventory levels and manage stock adjustments.</li>
+                    <li><strong>Fault Reporting:</strong> Report faults and track their resolution status.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">How do I report a fault?</h3>
+            <div class="faq-content">
+                <p>To report a fault, navigate to the Fault Reporting section, provide details, and submit the report.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical Support Section -->
+    <div class="faq-section">
+        <h2>Technical Support</h2>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">What should I do if I encounter technical issues?</h3>
+            <div class="faq-content">
+                <p>Contact our support team using the contact page for technical assistance.</p>
+            </div>
+        </div>
+
+        <div class="faq-card">
+            <h3 onclick="toggleFAQ(this)">Is training available for new users?</h3>
+            <div class="faq-content">
+                <p>Yes, we offer training sessions to help new users get acquainted with the system.</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="@Url.Action("Contact", "Home")" class="accent-button">Contact Us for More Information</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleFAQ(element) {
+            var card = element.parentElement;
+            card.classList.toggle("active");
+        }
+    </script>
+}

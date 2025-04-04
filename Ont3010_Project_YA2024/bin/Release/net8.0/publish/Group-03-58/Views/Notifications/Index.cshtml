@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Notification>
+
+<ul class="dropdown-menu dropdown-menu-end">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var notification in Model)
+        {
+            <li>
+                <a class="dropdown-item"
+                   style="color: @(notification.IsRead ? "gray" : "white");"
+                   href="@Url.Action("MarkAsRead", new { id = notification.Id })">
+                    @notification.Message by @notification.ActionBy <br />
+                    <small style="color: gray;">@notification.Date.ToString("g")</small>
+                </a>
+            </li>
+        }
+    }
+    else
+    {
+        <li>
+            <a class="dropdown-item" style="color: white;" href="#">No notifications available</a>
+        </li>
+    }
+</ul>

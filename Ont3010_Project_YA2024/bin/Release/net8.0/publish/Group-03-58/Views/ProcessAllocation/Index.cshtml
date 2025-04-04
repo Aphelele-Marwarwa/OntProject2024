@@ -1,0 +1,219 @@
+﻿@model IEnumerable<Ont3010_Project_YA2024.Models.InventoryLiaison.ProcessAllocation>
+
+@{
+    ViewData["Title"] = "Fridge Allocations";
+    Layout = "~/Views/Shared/_InventoryLiaisonLayout.cshtml";
+}
+@if (TempData["created"] != null)
+{
+    <div id="createdMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["created"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["deleted"] != null)
+{
+    <div id="deletedMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-trash-alt"></i> @TempData["deleted"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["updated"] != null)
+{
+    <div id="updatedMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-pencil-alt"></i> @TempData["updated"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["restored"] != null)
+{
+    <div id="restoredMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-undo-alt"></i> @TempData["restored"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="Fridge-details-container">
+<h1 class="text-center">
+    <i class="fas fa-archive"></i> Process Fridge Allocations
+</h1>
+
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <form method="get" asp-action="Index">
+                <div class="input-group">
+                    <input type="text" name="searchString" class="form-control" placeholder="Search by Customer Name or Fridge ID" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+        <div class="sort-options mb-3">
+            <label for="sortOrder">Sort By:</label>
+            <select id="sortOrder" onchange="updateSort()" data-current-sort="@ViewData["CurrentSort"]">
+                <option value="CustomerName" selected="@(ViewData["CurrentSort"]?.ToString() == "CustomerName")">Customer Name</option>
+                <option value="SerialNumber" selected="@(ViewData["CurrentSort"]?.ToString() == "SerialNumber")">Fridge Serial Number</option>
+                <option value="FridgeId" selected="@(ViewData["CurrentSort"]?.ToString() == "FridgeId")">Fridge ID</option>
+                <option value="DeliveryPickupDate" selected="@(ViewData["CurrentSort"]?.ToString() == "DeliveryPickupDate")">Delivery Pickup Date</option>
+            </select>
+
+            <label for="sortDirection">Sort Direction:</label>
+            <select id="sortDirection" onchange="updateSort()">
+                <option value="asc" selected="@(ViewData["CurrentDirection"]?.ToString() == "asc")">Ascending</option>
+                <option value="desc" selected="@(ViewData["CurrentDirection"]?.ToString() == "desc")">Descending</option>
+            </select>
+        </div>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Fridge ID</th>
+                <th>Delivery/Pickup Date</th>
+                <th>Special Instructions</th>
+                <th>Approval Status</th>
+                <th>Approval Note</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerName</td>
+                    <td>@item.FridgeId</td>
+                        <td>@item.AllocationDate.ToShortDateString()</td>
+                    <td>@item.SpecialInstructions</td>
+                    <td>@item.ApprovalStatus</td>
+                    <td>@item.ApprovalNote</td>
+                    <td>
+                        @if (item.ApprovalStatus == "Not Processed")
+                        {
+                            <a asp-action="Process" asp-route-id="@item.FridgeAllocationId" class="btn btn-primary">
+                                <i class="fas fa-cogs"></i> Process
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ProcessAllocationId" class="btn btn-secondary">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        <div class="pagination-container">
+            @if (Model != null && Model.Any())
+            {
+                <div class="pagination">
+                    @if (ViewBag.CurrentPage > 1) // Check if current page is greater than 1 for Previous button
+                    {
+                        <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" class="btn btn-secondary">Previous</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary disabled">Previous</a>
+                        // Disabled button if on the first page
+                    }
+
+                    <span>Page @ViewBag.CurrentPage of @ViewBag.TotalPages</span>
+
+                    @if (ViewBag.CurrentPage < ViewBag.TotalPages) // Check if current page is less than total pages for Next button
+                    {
+                        <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" class="btn btn-secondary">Next</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-secondary disable">Next</a>
+                        // Disabled button if on the last page
+                    }
+                </div>
+            }
+        </div>
+</div>
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateSort() {
+            const sortOrder = document.getElementById("sortOrder").value;
+            const sortDirection = document.getElementById("sortDirection").value;
+            const currentUrl = new URL(window.location.href);
+
+            // Update the URL parameters
+            currentUrl.searchParams.set("sortOrder", sortOrder);
+            currentUrl.searchParams.set("sortDirection", sortDirection);
+
+            // Redirect to the updated URL
+            window.location.href = currentUrl.toString();
+        }
+    </script>
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+                $("#restoredMessage").fadeOut();
+                $("#errorMessage").fadeOut();
+            }, 3000);
+        });
+
+    </script>
+    <style>
+        /* Add custom styles for the table and search form */
+        .Fridge-details-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            padding: 10px;
+            margin: 10px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table {
+            background-color: #ffffff;
+        }
+
+            .table th {
+                background-color: #007bff;
+                color: #ffffff;
+            }
+
+            .table td, .table th {
+                vertical-align: middle;
+            }
+
+        .input-group {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .input-group-append .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .input-group-append .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004a9a;
+            }
+    </style>
+}

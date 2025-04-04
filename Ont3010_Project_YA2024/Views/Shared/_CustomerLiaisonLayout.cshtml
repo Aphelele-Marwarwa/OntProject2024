@@ -1,0 +1,204 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+@inject BusinessService BusinessService
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Admin dashboard for managing fridge allocations and inventory.">
+    <meta name="author" content="Aphelele Marwarwa">
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] -  @ViewBag.BusinessName</title>
+     @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom navbar-dark shadow-sm mb-4">
+            <div class="container">
+                <a class="navbar-brand d-flex flex-column align-items-start" asp-area="" >
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.BusinessLogo" alt="Business Logo" class="business-logo">
+                        <div class="d-flex flex-column">
+                            <span>@ViewBag.BusinessName</span>
+                            <span class="slogan">@ViewBag.Slogan</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial.cshtml"></partial>
+                    @{
+                        // Cast ViewBag.Notifications to a list of EmployeeNotificationStatus
+                        var notifications = ViewBag.Notifications as List<Ont3010_Project_YA2024.Data.Notifications.EmployeeNotificationStatus>;
+                    }
+
+                    <!-- Notification Bell -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle notification-bell" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">@ViewBag.UnreadNotificationCount</span> <!-- Unread notifications count -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            @if (notifications != null && notifications.Any()) // Check if there are notifications
+                            {
+                                foreach (var notificationStatus in notifications) // Iterate over the EmployeeNotificationStatus objects
+                                {
+                                    var notification = notificationStatus.Notification; // Access the Notification object
+                                    <li>
+                                        <a class="dropdown-item"
+                                           style="color: @(notificationStatus.IsRead ? "gray" : "white");"
+                                           href="@Url.Action("MarkAsRead", new { id = notification.Id })">
+                                            @notification.Message by @notification.ActionBy <br />
+                                            <small style="color: gray;">@notification.Date.ToString("g")</small>
+                                        </a>
+                                    </li>
+                                }
+                               
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="dropdown-item" style="color: white;" href="#">No notifications available</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- End Notification Bell -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <!-- Wrap sidebar and main content in a container for responsiveness -->
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar" id="sidebarCollapse">
+                <button class="btn btn-primary toggle-btn" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+                    </svg>
+                </button>
+                <ul class="nav flex-column mt-4">
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/CustomerLiaison/Dashbord") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="CustomerLiaison" asp-action="Dashboard">
+                            <!-- Dashboard icon -->
+                            <img src="~/images/adminIcons/dashboard.png" width="30" height="30" alt="Dashboard" />
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/Customer/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Index">
+                            <!-- Customer Management icon -->
+                            <img src="~/images/adminIcons/user-tie-solid.svg" width="30" height="30" alt="Customer Management" />
+                            <span class="text">Customer Management</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/FridgeAllocation/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="FridgeAllocation" asp-action="Index">
+                            <!-- Manage Fridge Allocation icon -->
+                            <img src="~/images/adminIcons/supplier.png" width="30" height="30" alt="Manage Fridge Allocation" />
+                            <span class="text">Manage Fridge Allocation</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @(Context.Request.Path.StartsWithSegments("/CustomerLiaisonReporting/Index") ? "active" : "")">
+                        <a class="nav-link" asp-area="" asp-controller="CustomerLiaisonReporting" asp-action="Index">
+                            <!-- Reporting and Analytics icon -->
+                            <img src="~/images/adminIcons/Report.png" width="30" height="30" alt="Reporting and Analytics" />
+                            <span class="text">Reporting and Analytics</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center text-muted small">
+        <div class="colot">
+            <div class="container">
+                <p>
+                    &copy; @DateTime.Now.Year @ViewBag.BusinessName.  All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            // Function to handle click events on nav links
+            $('.nav-link').click(function () {
+                // Remove 'active' class from all nav items
+                $('.nav-item').removeClass('active');
+
+                // Add 'active' class to the parent 'li.nav-item' of the clicked link
+                $(this).closest('.nav-item').addClass('active');
+            });
+
+            // Set initial active state based on current URL
+            setActiveNavItem();
+
+            // Handle navigation changes (when user navigates to another page)
+            $(document).on('click', 'a.nav-link', function () {
+                // Wait a moment for the browser to start navigating
+                setTimeout(setActiveNavItem, 50);
+            });
+
+            // Function to set active navigation item based on current URL
+            function setActiveNavItem() {
+                var currentUrl = window.location.pathname;
+
+                // Remove 'active' class from all nav items
+                $('.nav-item').removeClass('active');
+
+                // Set 'active' class based on current URL
+                $('.nav-item').each(function () {
+                    var href = $(this).find('.nav-link').attr('href');
+                    // Adjusted check to compare URLs correctly
+                    if (currentUrl === href || currentUrl.startsWith(href + '/')) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+        });
+
+
+
+        $(document).ready(function () {
+            $('.toggle-btn').click(function () {
+                $('#sidebarCollapse').toggleClass('collapsed');
+                if ($('#sidebarCollapse').hasClass('collapsed')) {
+                    $('.nav-link .text').hide();  // Hide text
+                    $('.nav-link img').show();    // Show icons
+                } else {
+                    $('.nav-link .text').show();  // Show text
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

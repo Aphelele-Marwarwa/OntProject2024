@@ -1,0 +1,202 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Manage Email";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+
+
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="card mb-4">
+    <div class="card-header">
+        <h4>Change Your Email</h4>
+    </div>
+    <div class="card-body">
+        <form id="email-form" method="post">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            @if (Model.IsEmailConfirmed)
+            {
+                <div class="form-floating mb-3 input-group">
+                    <input asp-for="Email" class="form-control" placeholder="Your email address" disabled />
+                    <div class="input-group-append">
+                        <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                    </div>
+                    <label asp-for="Email" class="form-label">Email</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" class="form-control" placeholder="Your email address" disabled />
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link btn-custom">
+                        Send Verification Email
+                    </button>
+                </div>
+            }
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Enter new email address" />
+                <label asp-for="Input.NewEmail" class="form-label">New Email</label>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+                <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-primary btn-lg btn-custom">
+                    Change Email
+                </button>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <a asp-controller="Admin" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-lg btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Customer Liaison"))
+                {
+                    <a asp-controller="CustomerLiaison" asp-action="Dashboard" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-lg btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Inventory Liaison"))
+                {
+                    <a asp-controller="InventoryLiaison" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-lg btn-custom">
+
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Purchasing Manager"))
+                {
+                    <a asp-controller="PurchasingManager" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Customer"))
+                {
+                    <a asp-controller="CustomerCon" asp-action="Index" asp-route-id="@Model.Customer.CustomerId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Fault Technician"))
+                {
+                    <a asp-controller="FaultTechnician" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Maintenance technician"))
+                {
+                    <a asp-controller="Maintenancetechnician" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+                else if (User.IsInRole("Supplier"))
+                {
+                    <a asp-controller="Supplier" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+    .btn-link {
+        padding: 0.75rem 1.5rem; /* Adjust padding to match btn-primary */
+        font-size: 1rem;
+        border-radius: 0.375rem; /* Ensure consistent border radius */
+        color: #007bff; /* Adjust color for better visibility */
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        font-size: 1.125rem; /* Increase font size for better readability */
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        font-size: 1.125rem; /* Increase font size for better readability */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .form-floating {
+        position: relative;
+        margin-bottom: 1.5rem; /* Increase margin for spacing */
+    }
+
+        .form-floating input {
+            height: calc(3.5rem + 2px);
+            padding: 1rem 0.75rem;
+        }
+
+        .form-floating label {
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            height: calc(3.5rem - 1.5rem);
+            padding: 0 0.75rem;
+            pointer-events: none;
+            transition: all 0.2s;
+            color: #495057;
+            background-color: #fff;
+        }
+
+        .form-floating input:focus ~ label,
+        .form-floating input:not(:placeholder-shown) ~ label {
+            top: -0.75rem;
+            left: 0.75rem;
+            height: 1.5rem;
+            font-size: 0.75rem;
+            color: #495057;
+            background-color: #fff;
+            padding: 0 0.25rem;
+        }
+
+    .d-flex {
+        display: flex;
+    }
+
+        .d-flex .btn-custom {
+            margin-right: 1rem; /* Adjust as needed for the right margin */
+        }
+
+            .d-flex .btn-custom:last-child {
+                margin-right: 0; /* Ensures the last button does not have extra margin */
+            }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+</style>

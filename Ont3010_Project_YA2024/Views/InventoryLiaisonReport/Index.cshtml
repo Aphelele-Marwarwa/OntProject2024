@@ -1,0 +1,280 @@
+﻿@using Ont3010_Project_YA2024.Data.InventoryLiaisonRepServices;
+@using System.Linq;
+@using System.Collections.Generic;
+@{
+    ViewData["Title"] = "Inventory Liaison Reports";
+    Layout = "~/Views/Shared/_InventoryLiaisonLayout.cshtml";
+    var startDate = ViewData["StartDate"]?.ToString();
+    var endDate = ViewData["EndDate"]?.ToString();
+    var pieChartLabels = ViewBag.PieChartLabels as string[];
+    var pieChartValues = ViewBag.PieChartValues as int[];
+}
+<!-- Index.cshtml -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="contain">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="contain">
+        <div id="alert" class="alert alert-danger d-none" role="alert">
+            Start date cannot be later than end date!
+        </div>
+
+        <form method="get" action="@Url.Action("Index", "InventoryLiaisonReport")">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" value="@startDate" />
+                </div>
+                <div class="col-md-4">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" value="@endDate" />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("DownloadFridgeReportPdf", "InventoryLiaisonReport", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Fridge Report (PDF)</a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("DownloadFridgeReportExcel", "InventoryLiaisonReport", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Fridge Report (Excel)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contain">
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="fridgeChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <input type="hidden" id="chartBase64" name="chartBase64" />
+                <button id="downloadChart" class="btn btn-primary custom-btn mt-3">Download Bar Chart (PNG)</button>
+            </div>
+            <div class="col-md-6">
+                <canvas id="fridgePieChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadPieChart" class="btn btn-primary custom-btn mt-3">Download Pie Chart (PNG)</button>
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('fridgeChart').getContext('2d');
+                var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels));
+                var values = @Html.Raw(Json.Serialize(ViewBag.ChartValues));
+
+                if (labels.length === 0 || values.length === 0) {
+                    alert("No data available for the selected date range.");
+                    return;
+                }
+
+                var fridgeReportChart = new Chart(ctx, {
+                    type: 'bar', // Change this to 'bar' or another type if desired
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Number of Fridges',
+                            data: values,
+                            borderColor: 'rgba(255, 99, 132, 1)', // Change this to your desired border color
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Change this to your desired background color
+                            borderWidth: 1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { beginAtZero: true }
+                        }
+                    }
+                });
+
+                // Function to download chart as PNG
+                document.getElementById('downloadChart').addEventListener('click', function () {
+                    // Create a temporary canvas to add a white background
+                    var tempCanvas = document.createElement('canvas');
+                    var tempCtx = tempCanvas.getContext('2d');
+
+                    // Set canvas size to match the original chart
+                    tempCanvas.width = ctx.canvas.width;
+                    tempCanvas.height = ctx.canvas.height;
+
+                    // Fill the canvas with a white background
+                    tempCtx.fillStyle = 'white';
+                    tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+                    // Draw the chart onto the white background canvas
+                    tempCtx.drawImage(ctx.canvas, 0, 0);
+
+                    // Convert the new canvas to a Base64 image
+                    var chartBase64 = tempCanvas.toDataURL('image/png');
+
+                    // Trigger the download
+                    var link = document.createElement('a');
+                    link.href = chartBase64;
+                    link.download = 'FridgeReportChart.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+            });
+        </script>
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+        <script>
+            const ctx = document.getElementById('fridgePieChart').getContext('2d');
+            const fridgePieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(pieChartLabels)),
+                    datasets: [{
+                        label: 'Fridge Types',
+                        data: @Html.Raw(Json.Serialize(pieChartValues)),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)', // New color for segment 1
+                            'rgba(54, 162, 235, 0.6)', // New color for segment 2
+                            'rgba(255, 206, 86, 0.6)', // New color for segment 3
+                            'rgba(75, 192, 192, 0.6)', // New color for segment 4
+                            'rgba(153, 102, 255, 0.6)', // New color for segment 5
+                            'rgba(255, 159, 64, 0.6)'  // New color for segment 6
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)', // Border color for segment 1
+                            'rgba(54, 162, 235, 1)', // Border color for segment 2
+                            'rgba(255, 206, 86, 1)', // Border color for segment 3
+                            'rgba(75, 192, 192, 1)', // Border color for segment 4
+                            'rgba(153, 102, 255, 1)', // Border color for segment 5
+                            'rgba(255, 159, 64, 1)'  // Border color for segment 6
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Fridge Types Distribution'
+                        }
+                    }
+                }
+            });
+
+            // Function to download pie chart as PNG
+            // Function to download pie chart as PNG
+            document.getElementById('downloadPieChart').addEventListener('click', function () {
+                var pieChartCanvas = document.getElementById('fridgePieChart');
+
+                // Create a temporary canvas to draw the pie chart with a white background
+                var tempCanvas = document.createElement('canvas');
+                tempCanvas.width = pieChartCanvas.width; // Set the width
+                tempCanvas.height = pieChartCanvas.height; // Set the height
+
+                var tempCtx = tempCanvas.getContext('2d');
+                // Draw a white background
+                tempCtx.fillStyle = 'white';
+                tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+                // Draw the existing chart onto the temporary canvas
+                tempCtx.drawImage(pieChartCanvas, 0, 0);
+
+                // Get the base64 image data from the temporary canvas
+                var pieChartBase64 = tempCanvas.toDataURL('image/png');
+
+                var link = document.createElement('a');
+                link.href = pieChartBase64; // Set the href to the base64 data
+                link.download = 'FridgePieChart.png'; // Set the filename for download
+                document.body.appendChild(link);
+                link.click(); // Trigger the download
+                document.body.removeChild(link); // Clean up
+            });
+
+
+        </script>
+        <script>
+            // document.querySelectorAll('.btn-primary').forEach(button => {
+            //     button.addEventListener('click', function (e) {
+            //         if (!confirm('Are you sure you want to download this report?')) {
+            //             e.preventDefault();
+            //         }
+            //     });
+            // });
+
+            // Form validation for date inputs
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+                const alertDiv = document.getElementById('alert');
+                if (startDate > endDate) {
+                    alertDiv.classList.remove('d-none');
+                    e.preventDefault(); // Prevent form submission
+                } else {
+                    alertDiv.classList.add('d-none'); // Hide alert if valid
+                }
+            });
+
+
+        </script>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+            }
+
+            .contain {
+                margin-top: 20px;
+                padding: 20px;
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                color: #343a40;
+            }
+
+            .custom-btn {
+                margin-bottom: 0; /* Ensure no extra margin at the bottom */
+                margin-right: 5px; /* Adjust spacing between buttons */
+            }
+
+            .btn-primary {
+                background-color: #007b border-color: #007bff;
+            }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
+                    border-color: #0056b3;
+                }
+
+            .row {
+                margin-bottom: 10px;
+            }
+        </style>
+    }

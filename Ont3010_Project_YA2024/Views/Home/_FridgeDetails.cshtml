@@ -1,0 +1,80 @@
+﻿@model Ont3010_Project_YA2024.Models.InventoryLiaison.Fridge
+
+@{
+    ViewData["Title"] = "Fridge Details";
+   
+}
+
+<div class="contain mt-4">
+   
+
+    <div class="row mb-3">
+        @if (Model.FridgeImage != null)
+        {
+            <div class="col-md-6">
+                <h3>Fridge Image</h3>
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.FridgeImage)" class="card-img-top" alt="@Model.ModelType">
+            </div>
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4>Fridge Details</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Serial Number:</dt>
+                        <dd class="col-sm-8">@Model.SerialNumber</dd>
+
+                        <dt class="col-sm-4">Door Type:</dt>
+                        <dd class="col-sm-8">@Model.DoorType</dd>
+
+                        <dt class="col-sm-4">Condition:</dt>
+                        <dd class="col-sm-8">@Model.Condition</dd>
+
+                        <dt class="col-sm-4">Size:</dt>
+                        <dd class="col-sm-8">@Model.Size</dd>
+
+                        <dt class="col-sm-4">Warranty Start Date:</dt>
+                        <dd class="col-sm-8">@Model.WarrantyStartDate?.ToString("d")</dd>
+
+                        <dt class="col-sm-4">Warranty End Date:</dt>
+                        <dd class="col-sm-8">@Model.WarrantyEndDate?.ToString("d")</dd>
+
+                        @if (!string.IsNullOrEmpty(Model.Note))
+                        {
+                            <dt class="col-sm-4">Notes:</dt>
+                            <dd class="col-sm-8">@Model.Note</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<!-- Optional: Add custom CSS for additional styling -->
+<style>
+
+    .contain {
+        max-width: 900px;
+    }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+</style>

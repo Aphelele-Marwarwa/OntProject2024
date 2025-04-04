@@ -1,0 +1,245 @@
+﻿@model Ont3010_Project_YA2024.Models.admin.Business
+
+@{
+    ViewData["Title"] = "Edit Business Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["updated"] != null)
+{
+    <div id="createdMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["updated"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+
+
+<h1 class="my-4"><i class="fas fa-edit"></i> Edit Business Details</h1>
+<hr />
+<div class="row business-form">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form asp-action="Edit" method="post" class="p-4 bg-light border rounded shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="BusinessId" />
+
+                <div class="form-group mb-3">
+                    <label for="autocomplete">
+                        <i class="fas fa-map-marker-alt"></i> Search Address
+                    </label>
+                    <input id="autocomplete" placeholder="Enter your Location Name" type="text" class="form-control" aria-label="Search Address" />
+                    <span id="Search" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="LocationName" class="form-label"><i class="fas fa-quote-left"></i> LocationName</label>
+                    <input asp-for="LocationName" class="form-control" placeholder="Enter the Location Name" />
+                    <span asp-validation-for="LocationName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Slogan" class="form-label"><i class="fas fa-quote-left"></i> Slogan</label>
+                    <input asp-for="Slogan" class="form-control" placeholder="Enter the business slogan" />
+                    <span asp-validation-for="Slogan" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Street" class="form-label"><i class="fas fa-road"></i> Street</label>
+                    <input asp-for="Street" class="form-control" placeholder="Enter the street address" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="City" class="form-label"><i class="fas fa-city"></i> City</label>
+                    <input asp-for="City" class="form-control" placeholder="Enter the city" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="PostalCode" class="form-label"><i class="fas fa-postcode"></i>Postal Code</label>
+                    <input asp-for="PostalCode" class="form-control" placeholder="Enter the city" />
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="StateProvince" class="form-label"><i class="fas fa-globe-asia"></i> State/Province</label>
+                    <input asp-for="StateProvince" class="form-control" placeholder="Enter the state or province" />
+                    <span asp-validation-for="StateProvince" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Country" class="form-label"><i class="fas fa-globe"></i> Country</label>
+                    <input asp-for="Country" class="form-control" placeholder="Enter the country" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ContactPerson" class="form-label"><i class="fas fa-user"></i> Contact Person</label>
+                    <input asp-for="ContactPerson" class="form-control" placeholder="Enter the contact person’s name" />
+                    <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ContactEmail" class="form-label"><i class="fas fa-envelope"></i> Contact Email</label>
+                    <input asp-for="ContactEmail" class="form-control" placeholder="Enter the contact email" />
+                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+        <script>
+            function initAutocomplete() {
+                var autocomplete = new google.maps.places.Autocomplete(
+                    $('#autocomplete')[0], {
+                    types: ['address']
+                });
+
+                autocomplete.addListener('place_changed', function () {
+                    var place = autocomplete.getPlace();
+
+                    if (!place.geometry) {
+                        console.error("No details available for input: '" + place.name + "'");
+                        return;
+                    }
+
+                    // Clear previous values
+                    $('#Street').val('');
+                    $('#City').val('');
+                    $('#StateProvince').val('');
+                    $('#PostalCode').val('');
+                    $('#Country').val('');
+
+                    // Extract address components
+                    var addressComponents = place.address_components;
+
+                    // Initialize variables
+                    var streetNumber = '';
+                    var route = '';
+                    var city = '';
+                    var province = '';
+                    var postalCode = '';
+                    var country = '';
+
+                    // Loop through address components to find and assign values
+                    $.each(addressComponents, function (index, component) {
+                        var componentType = component.types[0];
+                        switch (componentType) {
+                            case 'street_number':
+                                streetNumber = component.long_name;
+                                break;
+                            case 'route':
+                                route = component.long_name;
+                                break;
+                            case 'locality':
+                                city = component.long_name;
+                                break;
+                            case 'administrative_area_level_1':
+                                province = component.long_name;
+                                break;
+                            case 'postal_code':
+                                postalCode = component.long_name;
+                                break;
+                            case 'country':
+                                country = component.long_name;
+                                break;
+                        }
+                    });
+
+                    // Combine street number and route (street name)
+                    var streetAddress = $.trim(streetNumber + ' ' + route);
+
+                    // Set the form fields
+                    $('#Street').val(streetAddress);
+                    $('#City').val(city);
+                    $('#StateProvince').val(province);
+                    $('#PostalCode').val(postalCode);
+                    $('#Country').val(country);
+                });
+            }
+        </script>
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage, #deletedMessage, #errorMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYN5T43zT4fm2KL3X24qg7aZFQA2zExM4&libraries=places&callback=initAutocomplete" async defer></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <style>
+            .form-label {
+                font-weight: bold;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+                .btn-primary:hover {
+                    background-color: #0056b3;
+                    border-color: #004085;
+                }
+
+            .alert-dismissible .btn-close {
+                position: absolute;
+                top: 0.5rem;
+                right: 0.5rem;
+                z-index: 1;
+            }
+
+            .btn-secondary {
+                background-color: #dc3545;
+                border-color: #dc3545;
+            }
+
+                .btn-secondary:hover {
+                    background-color: #c82333;
+                    border-color: #c82333;
+                }
+
+        .business-form .btn {
+            margin: 0.5rem;
+        }
+
+        .business-form .alert-dismissible .btn-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            z-index: 1;
+        }
+
+        .business-form .alert-dismissible .btn-close {
+            padding: 0.5rem 0.75rem;
+            margin: -0.5rem -0.75rem -0.5rem auto;
+        }
+        </style>
+    }
+

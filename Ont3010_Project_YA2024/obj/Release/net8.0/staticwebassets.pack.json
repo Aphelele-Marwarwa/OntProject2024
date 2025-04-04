@@ -1,0 +1,377 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\obj\\Release\\net8.0\\scopedcss\\projectbundle\\Ont3010_Project_YA2024.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Ont3010_Project_YA2024.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\css\\Admin.css",
+      "PackagePath": "staticwebassets\\css\\Admin.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\css\\identity.css",
+      "PackagePath": "staticwebassets\\css\\identity.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\CustomerLiaisonIcons\\Customer Liaison.png",
+      "PackagePath": "staticwebassets\\images\\CustomerLiaisonIcons\\Customer Liaison.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Customer\\Allocations.png",
+      "PackagePath": "staticwebassets\\images\\Customer\\Allocations.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Customer\\New Fridge Request.svg",
+      "PackagePath": "staticwebassets\\images\\Customer\\New Fridge Request.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Customer\\manage Reports.svg",
+      "PackagePath": "staticwebassets\\images\\Customer\\manage Reports.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Fault Technician\\Fault Technician .png",
+      "PackagePath": "staticwebassets\\images\\Fault Technician\\Fault Technician .png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Fault Technician\\FaultTechnicianIcons\\AssignedReports.svg",
+      "PackagePath": "staticwebassets\\images\\Fault Technician\\FaultTechnicianIcons\\AssignedReports.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Fault Technician\\FaultTechnicianIcons\\ViewCompletedRepairs.svg",
+      "PackagePath": "staticwebassets\\images\\Fault Technician\\FaultTechnicianIcons\\ViewCompletedRepairs.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Fault Technician\\FaultTechnicianIcons\\ViewUnassignedReports.svg",
+      "PackagePath": "staticwebassets\\images\\Fault Technician\\FaultTechnicianIcons\\ViewUnassignedReports.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\InventoryLiaisonIcons\\Inventory Liaison.jpg",
+      "PackagePath": "staticwebassets\\images\\InventoryLiaisonIcons\\Inventory Liaison.jpg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\InventoryLiaisonIcons\\ProcessFridge.png",
+      "PackagePath": "staticwebassets\\images\\InventoryLiaisonIcons\\ProcessFridge.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\InventoryLiaisonIcons\\Purchase.png",
+      "PackagePath": "staticwebassets\\images\\InventoryLiaisonIcons\\Purchase.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\InventoryLiaisonIcons\\scrap.png",
+      "PackagePath": "staticwebassets\\images\\InventoryLiaisonIcons\\scrap.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Maintenance Technician\\Maintenance Technician .png",
+      "PackagePath": "staticwebassets\\images\\Maintenance Technician\\Maintenance Technician .png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\Purchasing Manager\\Purchasing Manager.png",
+      "PackagePath": "staticwebassets\\images\\Purchasing Manager\\Purchasing Manager.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\1-Door-Back-Bar-Freezer-as-Glass-Froster.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\1-Door-Back-Bar-Freezer-as-Glass-Froster.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Fridge.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Fridge.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Glass-Door-Back-Bar-Freezers-as-Glass-Frosters.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Glass-Door-Back-Bar-Freezers-as-Glass-Frosters.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Location.jpg",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Location.jpg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Location.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Location.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Profile.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Profile.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\Report.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\Report.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\background foto.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\background foto.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\dashboard.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\dashboard.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\supplier.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\supplier.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\system.png",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\system.png"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\images\\adminIcons\\user-tie-solid.svg",
+      "PackagePath": "staticwebassets\\images\\adminIcons\\user-tie-solid.svg"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\APHELELE\\Downloads\\Ont3010_Project_YA2024\\Ont3010_Project_YA2024\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.Ont3010_Project_YA2024.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.Ont3010_Project_YA2024.props",
+      "PackagePath": "build\\Ont3010_Project_YA2024.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Ont3010_Project_YA2024.props",
+      "PackagePath": "buildMultiTargeting\\Ont3010_Project_YA2024.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.Ont3010_Project_YA2024.props",
+      "PackagePath": "buildTransitive\\Ont3010_Project_YA2024.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

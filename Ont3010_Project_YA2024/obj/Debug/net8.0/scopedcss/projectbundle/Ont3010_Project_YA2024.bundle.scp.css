@@ -1,0 +1,512 @@
+/* _content/Ont3010_Project_YA2024/Views/Shared/_AdminLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-a1g44wy8lh] {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a[b-a1g44wy8lh] {
+    color: #0077cc;
+}
+
+.btn-primary[b-a1g44wy8lh] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.business-logo[b-a1g44wy8lh] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-a1g44wy8lh] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+/*
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+.nav-item.active {
+    border: 3px solid #fff; /* Adjust color and thickness as needed */
+/*border-radius: 5px;*/ /* Optional: Rounded corners */
+}
+
+*/
+
+.border-top[b-a1g44wy8lh] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-a1g44wy8lh] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-a1g44wy8lh] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-a1g44wy8lh] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-a1g44wy8lh] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+/* Responsive Styles */
+
+/* Styles for phones and small screens */
+@media (max-width: 576px) {
+    .business-logo[b-a1g44wy8lh] {
+        height: 40px; /* Reduce logo height for smaller screens */
+        margin-right: 5px; /* Reduce margin for smaller screens */
+    }
+
+    .slogan[b-a1g44wy8lh] {
+        font-size: 0.875rem; /* Smaller font size for slogan */
+        margin-left: 20px; /* Reduce left margin */
+    }
+
+    .footer[b-a1g44wy8lh] {
+        line-height: 40px; /* Reduce footer line height for smaller screens */
+        padding: 10px 0; /* Add some padding to the footer */
+    }
+
+    a.navbar-brand[b-a1g44wy8lh] {
+        font-size: 1rem; /* Smaller font size for brand */
+    }
+
+    a[b-a1g44wy8lh] {
+        font-size: 0.875rem; /* Adjust font size for links */
+    }
+
+    button.accept-policy[b-a1g44wy8lh] {
+        font-size: 0.875rem; /* Smaller button font size */
+    }
+}
+
+/* Medium screens */
+@media (min-width: 577px) and (max-width: 768px) {
+    .business-logo[b-a1g44wy8lh] {
+        height: 45px; /* Adjust logo height for medium screens */
+    }
+
+    .slogan[b-a1g44wy8lh] {
+        font-size: 0.9rem; /* Adjust font size for medium screens */
+    }
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_CustomerLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-nyx8rgtrfq] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-nyx8rgtrfq] {
+  color: #0077cc;
+}
+
+.btn-primary[b-nyx8rgtrfq] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.business-logo[b-nyx8rgtrfq] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-nyx8rgtrfq] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+.nav-pills .nav-link.active[b-nyx8rgtrfq], .nav-pills .show > .nav-link[b-nyx8rgtrfq] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.nav-item.active[b-nyx8rgtrfq] {
+    border: 3px solid #fff; /* Adjust color and thickness as needed */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.border-top[b-nyx8rgtrfq] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-nyx8rgtrfq] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-nyx8rgtrfq] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-nyx8rgtrfq] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-nyx8rgtrfq] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_CustomerLiaisonLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-6roed5xgol] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-6roed5xgol] {
+  color: #0077cc;
+}
+
+.btn-primary[b-6roed5xgol] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.business-logo[b-6roed5xgol] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-6roed5xgol] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+.nav-pills .nav-link.active[b-6roed5xgol], .nav-pills .show > .nav-link[b-6roed5xgol] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.nav-item.active[b-6roed5xgol] {
+    border: 3px solid #fff; /* Adjust color and thickness as needed */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.border-top[b-6roed5xgol] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-6roed5xgol] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-6roed5xgol] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-6roed5xgol] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-6roed5xgol] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_InventoryLiaisonLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-7owjizzhsi] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-7owjizzhsi] {
+  color: #0077cc;
+}
+
+.btn-primary[b-7owjizzhsi] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.business-logo[b-7owjizzhsi] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-7owjizzhsi] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+.nav-pills .nav-link.active[b-7owjizzhsi], .nav-pills .show > .nav-link[b-7owjizzhsi] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.nav-item.active[b-7owjizzhsi] {
+    border: 3px solid #fff; /* Adjust color and thickness as needed */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.border-top[b-7owjizzhsi] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-7owjizzhsi] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-7owjizzhsi] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-7owjizzhsi] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-7owjizzhsi] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Ensures nav-link color is white */
+.navbar-nav .nav-link[b-cclcxt1ffh] {
+    color: #ffffff !important; /* Force white color */
+}
+
+/* Ensures active state link color is white */
+.nav-pills .nav-link.active[b-cclcxt1ffh],
+.nav-pills .show > .nav-link[b-cclcxt1ffh] {
+    color: #ffffff !important; /* Force white color for active links */
+    background-color: #1b6ec2; /* Background color for active link */
+    border-color: #1861ac; /* Border color for active link */
+}
+
+/* Ensures active nav-item border color is white */
+.nav-item.active[b-cclcxt1ffh] {
+    border: 3px solid #fff !important; /* White border for active nav items */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.background-wrapper[b-cclcxt1ffh] {
+    min-height: calc(100vh - (header height + footer height)); /* Adjust to fit your layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Additional CSS to ensure all anchor tags have white color */
+a.navbar-brand[b-cclcxt1ffh] {
+    color: #ffffff !important; /* White color for brand */
+}
+
+a[b-cclcxt1ffh] {
+    color: #ffffff !important; /* White color for all anchor tags */
+}
+
+.business-logo[b-cclcxt1ffh] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-cclcxt1ffh] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+/* Other CSS styles */
+.btn-primary[b-cclcxt1ffh] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top[b-cclcxt1ffh] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-cclcxt1ffh] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-cclcxt1ffh] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-cclcxt1ffh] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-cclcxt1ffh] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_LoginLayout.cshtml.rz.scp.css */
+/* Ensures nav-link color is white */
+.navbar-nav .nav-link[b-n96sw2p8rn] {
+    color: #ffffff !important; /* Force white color */
+}
+
+/* Ensures active state link color is white */
+.nav-pills .nav-link.active[b-n96sw2p8rn],
+.nav-pills .show > .nav-link[b-n96sw2p8rn] {
+    color: #ffffff !important; /* Force white color for active links */
+    background-color: #1b6ec2; /* Background color for active link */
+    border-color: #1861ac; /* Border color for active link */
+}
+
+/* Ensures active nav-item border color is white */
+.nav-item.active[b-n96sw2p8rn] {
+    border: 3px solid #fff !important; /* White border for active nav items */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.background-wrapper[b-n96sw2p8rn] {
+    min-height: calc(100vh - (header height + footer height)); /* Adjust to fit your layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Additional CSS to ensure all anchor tags have white color */
+a.navbar-brand[b-n96sw2p8rn] {
+    color: #ffffff !important; /* White color for brand */
+}
+
+a[b-n96sw2p8rn] {
+    color: #ffffff !important; /* White color for all anchor tags */
+}
+
+.business-logo[b-n96sw2p8rn] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-n96sw2p8rn] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+/* Other CSS styles */
+.btn-primary[b-n96sw2p8rn] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top[b-n96sw2p8rn] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-n96sw2p8rn] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-n96sw2p8rn] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-n96sw2p8rn] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-n96sw2p8rn] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+/* _content/Ont3010_Project_YA2024/Views/Shared/_mainLayout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-znozn0x4ol] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-znozn0x4ol] {
+  color: #0077cc;
+}
+
+.btn-primary[b-znozn0x4ol] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+.business-logo[b-znozn0x4ol] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-znozn0x4ol] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+.nav-pills .nav-link.active[b-znozn0x4ol], .nav-pills .show > .nav-link[b-znozn0x4ol] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-znozn0x4ol] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-znozn0x4ol] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-znozn0x4ol] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-znozn0x4ol] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-znozn0x4ol] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

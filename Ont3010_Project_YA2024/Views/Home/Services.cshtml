@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "Services";
+}
+
+<div class="services-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <p>At Fridge Management System, we offer a range of services designed to enhance the efficiency and effectiveness of your fridge management operations. Our comprehensive solutions cater to various aspects of fridge management, ensuring seamless integration and optimal performance. Explore our services below to see how we can support your needs.</p>
+
+    <h2>Our Services</h2>
+
+    <div class="accordion">
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <i class="fas fa-user-cog"></i> 1. Customer Management
+            </h3>
+            <div class="accordion-content">
+                <p>Our Customer Management service allows you to efficiently manage customer information and fridge allocations. With our system, you can:</p>
+                <ul>
+                    <li>Maintain accurate and up-to-date customer records.</li>
+                    <li>Allocate fridges to customers and track their usage.</li>
+                    <li>Enhance customer service with streamlined management and communication.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <i class="fas fa-boxes"></i> 2. Inventory Control
+            </h3>
+            <div class="accordion-content">
+                <p>Our Inventory Control service provides robust tools for managing your fridge inventory. Key features include:</p>
+                <ul>
+                    <li>Real-time tracking of fridge stock levels.</li>
+                    <li>Automated inventory adjustments for new deliveries and scrapped fridges.</li>
+                    <li>Internal purchase request management for low stock levels.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <i class="fas fa-exclamation-triangle"></i> 3. Fault Reporting
+            </h3>
+            <div class="accordion-content">
+                <p>Efficient fault reporting is crucial for maintaining operational efficiency. Our system facilitates:</p>
+                <ul>
+                    <li>Easy submission and tracking of fault reports by customers.</li>
+                    <li>Comprehensive fault diagnostics and prioritization by technicians.</li>
+                    <li>Scheduling and notification for necessary repairs and follow-ups.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <i class="fas fa-tools"></i> 4. Maintenance Scheduling
+            </h3>
+            <div class="accordion-content">
+                <p>Our Maintenance Scheduling service ensures timely and organized maintenance for fridges. This includes:</p>
+                <ul>
+                    <li>Viewing and managing maintenance schedules and service histories.</li>
+                    <li>Scheduling maintenance visits and managing technician assignments.</li>
+                    <li>Providing customers with visibility into upcoming maintenance activities.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <i class="fas fa-shopping-cart"></i> 5. Procurement Management
+            </h3>
+            <div class="accordion-content">
+                <p>The Procurement Management service streamlines your procurement processes, including:</p>
+                <ul>
+                    <li>Managing supplier information and processing purchase requests.</li>
+                    <li>Handling quotations and creating purchase orders.</li>
+                    <li>Generating delivery notes and tracking order fulfillment.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Why Choose Us?</h2>
+    <p>Our Fridge Management System offers several advantages, including:</p>
+    <ul>
+        <li><strong>Comprehensive Solutions:</strong> A one-stop platform for all your fridge management needs.</li>
+        <li><strong>Efficiency:</strong> Streamlined processes and real-time data to enhance operational efficiency.</li>
+        <li><strong>Customer Support:</strong> Dedicated support to assist you with any queries or issues.</li>
+    </ul>
+
+    <p>For more information about our services or to schedule a demo, please contact us through the information provided on our Contact page. We look forward to helping you optimize your fridge management operations!</p>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<style>
+    .services-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        color: #333;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    h1, h2, h3 {
+        color: #0056b3;
+    }
+
+    .accordion-item {
+        margin-bottom: 15px;
+    }
+
+    .accordion-header {
+        font-size: 1.2rem;
+        background-color: #e0e0e0;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background-color 0.3s ease;
+    }
+
+    .accordion-header i {
+        margin-right: 10px;
+        color: #0056b3;
+    }
+
+    .accordion-header:hover {
+        background-color: #cce5ff;
+    }
+
+    .accordion-content {
+        display: none;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #fff;
+        margin-top: 5px;
+    }
+
+    .accordion-item.active .accordion-content {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    /* Keyframes for animations */
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @@keyframes slideDown {
+        from { max-height: 0; opacity: 0; }
+        to { max-height: 500px; opacity: 1; }
+    }
+</style>
+
+<script>
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionItem = header.parentElement;
+            accordionItem.classList.toggle('active');
+        });
+    });
+</script>

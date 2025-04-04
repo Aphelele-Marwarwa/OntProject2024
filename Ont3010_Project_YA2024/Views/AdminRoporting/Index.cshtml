@@ -1,0 +1,54 @@
+﻿@using Ont3010_Project_YA2024.Data.InventoryLiaisonRepServices;
+@using System.Linq;
+@using System.Collections.Generic;
+@{
+    ViewData["Title"] = "Admin Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var startDate = ViewData["StartDate"]?.ToString();
+    var endDate = ViewData["EndDate"]?.ToString();
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">
+    <form method="get" action="@Url.Action("Index", "AdminRoporting")">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" value="@startDate" />
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" value="@endDate" />
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("DownloadFridgeReportPdf", "InventoryLiaisonReport", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Fridge Report (PDF)</a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("DownloadFridgeReportExcel", "InventoryLiaisonReport", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Fridge Report (Excel)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="@Url.Action("DownloadCustomerReportPDF", "CustomerLiaisonReporting", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Customer Report (PDF)</a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("DownloadCustomerReportEXCL", "CustomerLiaisonReporting", new { startDate = startDate, endDate = endDate })" class="btn btn-primary">Download Customer Report (Excel)</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Graphs and Charts</h3>
+            <div id="graphs-placeholder">
+                <!-- Graphs can be added here using JavaScript chart libraries like Chart.js or D3.js -->
+            </div>
+        </div>
+    </div>
+</div>

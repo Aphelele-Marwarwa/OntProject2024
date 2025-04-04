@@ -1,0 +1,35 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+@inject BusinessService BusinessService
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] - @ViewBag.BusinessName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+<body style="background-image: url('@ViewBag.CoverPhoto');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;">
+   
+    <div class="container">
+        <main role="main" class="pb-4">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

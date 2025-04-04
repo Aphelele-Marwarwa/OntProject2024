@@ -1,0 +1,294 @@
+﻿@using Ont3010_Project_YA2024.Data.InventoryLiaisonRepServices;
+@using System.Linq;
+@using System.Collections.Generic;
+
+@{
+    ViewData["Title"] = "Admin Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var startDate = ViewData["StartDate"]?.ToString();
+    var endDate = ViewData["EndDate"]?.ToString();
+    var customerChartLabels = ViewBag.CustomerChartLabels as string[]; // Updated variable name
+    var customerChartValues = ViewBag.CustomerChartValues as int[];   // Updated variable name
+    var fridgeChartLabels = ViewBag.FridgeChartLabels as string[];   // Updated variable name
+    var fridgeChartValues = ViewBag.FridgeChartValues as int[];      // Updated variable name
+    var customerPieChartLabels = ViewBag.CustomerPieChartLabels as string[]; // Updated variable name
+    var customerPieChartValues = ViewBag.CustomerPieChartValues as int[];     // Updated variable name
+    var fridgePieChartLabels = ViewBag.FridgePieChartLabels as string[];     // Updated variable name
+    var fridgePieChartValues = ViewBag.FridgePieChartValues as int[];        // Updated variable name
+}
+
+<div class="contain">
+    <h2 class="text-center my-4">@ViewData["Title"]</h2>
+
+    <div class="contain">
+        <!-- Date Filter Form -->
+        <form method="get" action="@Url.Action("Index", "AdminReporting")" class="mb-4">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="startDate" class="form-label">Start Date:</label>
+                    <input type="date" id="startDate" name="startDate" class="form-control" value="@startDate" required />
+                </div>
+                <div class="col-md-4">
+                    <label for="endDate" class="form-label">End Date:</label>
+                    <input type="date" id="endDate" name="endDate" class="form-control" value="@endDate" required />
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Download Buttons -->
+        <div class="row mb-4">
+            <div class="col-md-6 text-center">
+                <a href="@Url.Action("DownloadFridgeReportPdf", "InventoryLiaisonReport", new { startDate, endDate })" class="btn btn-success btn-lg shadow">Download Fridge Report (PDF)</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <a href="@Url.Action("DownloadFridgeReportExcel", "InventoryLiaisonReport", new { startDate, endDate })" class="btn btn-success btn-lg shadow">Download Fridge Report (Excel)</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6 text-center">
+                <a href="@Url.Action("DownloadCustomerReportPDF", "CustomerLiaisonReporting", new { startDate, endDate })" class="btn btn-info btn-lg shadow">Download Customer Report (PDF)</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <a href="@Url.Action("DownloadCustomerReportExcel", "CustomerLiaisonReporting", new { startDate, endDate })" class="btn btn-info btn-lg shadow">Download Customer Report (Excel)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contain">
+        <!-- Charts Section -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <canvas id="customerChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadChart" class="btn btn-primary custom-btn mt-3">Download Bar Chart (PNG)</button>
+            </div>
+            <div class="col-md-6">
+                <canvas id="customerPieChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadPieChart" class="btn btn-primary custom-btn mt-3">Download Pie Chart (PNG)</button>
+            </div>
+        </div>
+    </div>
+    <div class="contain">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <canvas id="fridgeChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadChartFridge" class="btn btn-primary custom-btn mt-3">Download Bar Chart (PNG)</button>
+            </div>
+            <div class="col-md-6">
+                <canvas id="fridgePieChart" style="max-width: 400px; max-height: 200px;"></canvas>
+                <button id="downloadPieChartFridge" class="btn btn-primary custom-btn mt-3">Download Pie Chart (PNG)</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Customer Chart
+            const ctxCustomer = document.getElementById('customerChart').getContext('2d');
+            const labelsCustomer = @Html.Raw(Json.Serialize(ViewBag.CustomerChartLabels));
+            const valuesCustomer = @Html.Raw(Json.Serialize(ViewBag.CustomerChartValues));
+
+            if (labelsCustomer.length === 0 || valuesCustomer.length === 0) {
+                alert("No data available for the selected date range.");
+                return;
+            }
+
+            const customerReportChart = new Chart(ctxCustomer, {
+                type: 'bar',
+                data: {
+                    labels: labelsCustomer,
+                    datasets: [{
+                        label: 'Number of Customers',
+                        data: valuesCustomer,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Function to download customer chart as PNG
+            document.getElementById('downloadChart').addEventListener('click', function () {
+                downloadChartAsPng(ctxCustomer, 'CustomerReportChart.png');
+            });
+
+            // Initialize Customer Pie Chart
+            const ctxCustomerPie = document.getElementById('customerPieChart').getContext('2d');
+            const customerPieChart = new Chart(ctxCustomerPie, {
+                type: 'pie',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(customerPieChartLabels)),
+                    datasets: [{
+                        label: 'Customer Types',
+                        data: @Html.Raw(Json.Serialize(customerPieChartValues)),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Function to download customer pie chart as PNG
+            document.getElementById('downloadPieChart').addEventListener('click', function () {
+                downloadChartAsPng(ctxCustomerPie, 'CustomerPieChart.png');
+            });
+
+            // Initialize Fridge Chart
+            const ctxFridge = document.getElementById('fridgeChart').getContext('2d');
+            const labelsFridge = @Html.Raw(Json.Serialize(ViewBag.FridgeChartLabels));
+            const valuesFridge = @Html.Raw(Json.Serialize(ViewBag.FridgeChartValues));
+
+            const fridgeReportChart = new Chart(ctxFridge, {
+                type: 'bar',
+                data: {
+                    labels: labelsFridge,
+                    datasets: [{
+                        label: 'Number of Fridges',
+                        data: valuesFridge,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Function to download fridge chart as PNG
+            document.getElementById('downloadChartFridge').addEventListener('click', function () {
+                downloadChartAsPng(ctxFridge, 'FridgeReportChart.png');
+            });
+
+            // Initialize Fridge Pie Chart
+            const ctxFridgePie = document.getElementById('fridgePieChart').getContext('2d');
+            const fridgePieChart = new Chart(ctxFridgePie, {
+                type: 'pie',
+                data: {
+                    labels: @Html.Raw(Json.Serialize(fridgePieChartLabels)),
+                    datasets: [{
+                        label: 'Fridge Types',
+                        data: @Html.Raw(Json.Serialize(fridgePieChartValues)),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Function to download fridge pie chart as PNG
+            document.getElementById('downloadPieChartFridge').addEventListener('click', function () {
+                downloadChartAsPng(ctxFridgePie, 'FridgePieChart.png');
+            });
+
+            // Function to download chart as PNG
+            function downloadChartAsPng(chartContext, fileName) {
+                const canvas = chartContext.canvas;
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = fileName;
+                link.click();
+            }
+        });
+    </script>
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .contain {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #343a40;
+        }
+
+        .custom-btn {
+            margin-bottom: 0; /* Ensure no extra margin at the bottom */
+            margin-right: 5px; /* Adjust spacing between buttons */
+        }
+
+        .btn-primary {
+            background-color: #007b border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .row {
+            margin-bottom: 10px;
+        }
+    </style>
+}

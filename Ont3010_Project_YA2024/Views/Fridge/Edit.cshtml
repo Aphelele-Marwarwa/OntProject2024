@@ -1,0 +1,245 @@
+﻿@model Ont3010_Project_YA2024.Models.InventoryLiaison.Fridge
+
+@{
+    ViewData["Title"] = "Edit Fridge";
+    Layout = ViewData["Layout"] as string;
+}
+@if (TempData["updated"] != null)
+{
+    <div id="updatedMessage" class="alert alert-success" role="alert">
+        @TempData["updated"]
+    </div>
+}
+@if (TempData["error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger" role="alert">
+        @TempData["error"]
+    </div>
+}
+<div class="container custom-container">
+    <h1 class="text-center custom-title">
+        <i class="fas fa-edit"></i> @ViewData["Title"]
+    </h1>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="FridgeId" />
+                <input type="hidden" asp-for="SerialNumber" />
+
+                <div class="form-group">
+                    <label asp-for="ModelType" class="control-label">Model Type</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-box"></i></span> <!-- Icon for ModelType -->
+                        </div>
+                        <input asp-for="ModelType" class="form-control custom-form-control" />
+                    </div>
+                    <span asp-validation-for="ModelType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DoorType" class="control-label">Door Type</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-door-open"></i></span> <!-- Icon for DoorType -->
+                        </div>
+                        <input asp-for="DoorType" class="form-control" />
+                    </div>
+                    <span asp-validation-for="DoorType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Size" class="control-label">Size</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-ruler-combined"></i></span> <!-- Icon for Size -->
+                        </div>
+                        <input asp-for="Size" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Capacity" class="control-label">Capacity</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-weight-hanging"></i></span> <!-- Icon for Capacity -->
+                        </div>
+                        <input asp-for="Capacity" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Condition" class="control-label">Condition</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-cogs"></i></span> <!-- Icon for Condition -->
+                        </div>
+                        <select asp-for="Condition" class="form-control">
+                            <option value="">Select Condition</option>
+                            <option value="New">New</option>
+                            <option value="Used">Used</option>
+                            <option value="Refurbished">Refurbished</option>
+                            <option value="Damaged">Damaged</option>
+                            <option value="In Repair">In Repair</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Condition" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SerialNumber" class="control-label">Serial Number</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-barcode"></i></span> <!-- Icon for SerialNumber -->
+                        </div>
+                        <input asp-for="SerialNumber" class="form-control custom-form-control" />
+                    </div>
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SupplierName" class="control-label">Supplier Name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-industry"></i></span> <!-- Icon for SupplierName -->
+                        </div>
+                        <input asp-for="SupplierName" class="form-control custom-form-control" />
+                    </div>
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="SupplierContact" class="control-label">Supplier Contact</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span> <!-- Icon for SupplierContact -->
+                        </div>
+                        <input asp-for="SupplierContact" class="form-control custom-form-control" />
+                    </div>
+                    <span asp-validation-for="SupplierContact" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DeliveryDocumentation" class="control-label">Delivery Documentation (Optional)</label>
+                    <input type="file" name="DeliveryDocumentation" class="form-control" />
+                    <span asp-validation-for="DeliveryDocumentation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FridgeImage" class="control-label">Fridge Image (Optional)</label>
+                    <input type="file" name="FridgeImage" class="form-control" />
+                    <span asp-validation-for="FridgeImage" class="text-danger"></span>
+                </div>
+
+                @if (Model.FridgeImage != null)
+                {
+                    <!-- Display existing fridge image -->
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> Existing Fridge Image</label>
+                        <img src="data:image;base64,@Convert.ToBase64String(Model.FridgeImage)" alt="Fridge Image" width="150" />
+                        <input type="hidden" name="existingFridgeImage" value="@Convert.ToBase64String(Model.FridgeImage)" />
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="Note" class="control-label">Note</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-sticky-note"></i></span> <!-- Icon for Note -->
+                        </div>
+                        <textarea asp-for="Note" class="form-control custom-form-control"></textarea>
+                    </div>
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-primary custom-btn-primary">
+                        <i class="fas fa-save"></i> Edit
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary custom-btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#updatedMessage").fadeOut();
+                $("#errorMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+}
+
+<!-- Move Font Awesome stylesheet link above script references -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    .custom-container {
+        max-width: 900px;
+        margin: auto;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-title {
+        color: #ffc107;
+    }
+
+    .custom-form-group {
+        margin-bottom: 1rem;
+    }
+
+    .custom-form-control {
+        border-radius: 0.25rem;
+    }
+
+    .custom-btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .custom-btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004db3;
+        }
+
+    .custom-btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .custom-btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .fa-edit {
+        color: #ffc107;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+</style>

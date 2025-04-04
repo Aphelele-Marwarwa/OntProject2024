@@ -1,0 +1,186 @@
+﻿@using Ont3010_Project_YA2024.Data
+@using Microsoft.AspNetCore.Identity
+@using Ont3010_Project_YA2024.Models.admin
+@using Ont3010_Project_YA2024.Models.CustomerLiaison
+
+@using Ont3010_Project_YA2024.Areas.Identity.Pages.Account.Manage
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext Context
+
+
+<!-- Include Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    .dropdown-menu {
+        background-color: #08505a !important;
+    }
+
+    .nav-link.dropdown-toggle {
+        display: flex;
+        align-items: center;
+        color: white;
+        position: relative; /* Ensure relative positioning for dropdown */
+    }
+
+    .profile-picture {
+        margin-left: 10px;
+        border-radius: 50%;
+        width: 45px; /* Set to your desired size */
+        height: 45px; /* Set to your desired size */
+        object-fit: cover; /* Ensures the image fits well within the dimensions */
+    }
+
+    .display-name {
+        margin-left: 5px;
+        font-weight: bold;
+    }
+
+    .dropdown-toggle::after {
+        content: none; /* Remove default caret */
+    }
+
+    .dropdown-toggle .fa-caret-down {
+        margin-left: 10px; /* Space between name and icon */
+        color: white; /* Ensure caret color matches text */
+    }
+
+    .dropdown-menu {
+        left: auto;
+        right: 0; /* Align to the right */
+    }
+
+        .dropdown-menu .nav-item .nav-link {
+            color: white !important;
+        }
+
+            .dropdown-menu .nav-item .nav-link:hover {
+                color: gray !important;
+            }
+</style>
+<ul class="navbar-nav">
+    @{
+        if (SignInManager.IsSignedIn(User))
+        {
+            var userId = UserManager.GetUserId(User);
+            var user = await UserManager.FindByIdAsync(userId);
+            var employee = await Context.Employees.FirstOrDefaultAsync(e => e.Email == user.Email);
+
+            if (employee != null)
+            {
+
+                var displayName = $"{employee.FirstName} {employee.LastName}";
+                var defaultProfilePicture = "~/images/adminIcons/Profile.png"; // Adjust the default image path
+                                                                              // Convert byte[] to Base64 string
+                string profilePictureBase64 = null;
+                if (employee.ProfilePhoto != null && employee.ProfilePhoto.Length > 0)
+                {
+                    profilePictureBase64 = Convert.ToBase64String(employee.ProfilePhoto);
+                }
+                var profilePictureDataUrl = profilePictureBase64 != null ? $"data:image/png;base64,{profilePictureBase64}" : defaultProfilePicture;
+
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-caret-down"></i> <!-- Font Awesome caret-down icon -->
+                        <span class="display-name">@displayName</span>
+                        <img src="@((employee.ProfilePhoto != null && employee.ProfilePhoto.Length > 0) ? $"data:image/png;base64,{Convert.ToBase64String(employee.ProfilePhoto)}" : Url.Content("~/images/adminIcons/Profile.png"))" class="rounded-circle profile-picture" style="width: 45px; height: 45px;" alt="Profile Picture">
+
+
+
+                    </a>
+
+                    <!-- Dropdown menu items -->
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                     
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Admin" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                    <i class="fa-solid fa-home"></i> Home
+                                </a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Customer Liaison"))
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="CustomerLiaison" asp-action="Dashboard" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                    <i class="fa-solid fa-home"></i> Home
+                                </a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Inventory Liaison"))
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="InventoryLiaison" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                    <i class="fa-solid fa-home"></i> Home
+                                </a>
+                            </li>
+                        }
+                        else if (User.IsInRole("Purchasing Manager"))
+                        {
+                            <a asp-controller="PurchasingManager" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                <i class="fa-solid fa-home"></i> Home
+                            </a>
+                        }
+                        else if (User.IsInRole("Fault Technician"))
+                        {
+                            <a asp-controller="FaultTechnician" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                <i class="fa-solid fa-home"></i> Home
+                            </a>
+                        }
+                        else if (User.IsInRole("Maintenance Technician"))
+                        {
+                            <a asp-controller="MaintenanceTechnician" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                <i class="fa-solid fa-home"></i> Home
+                            </a>
+                        }
+                        else if (User.IsInRole("Customer"))
+                        {
+                            <a asp-controller="CustomerCon" asp-action="Index" asp-route-id="@employee.EmployeeId" class="nav-link">
+                                <i class="fa-solid fa-home"></i> Home
+                            </a>
+                        }
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/PersonalData">
+                                <i class="fa-solid fa-user"></i> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Email">
+                                <i class="fa-solid fa-envelope"></i> Email
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/ChangePassword">
+                                <i class="fa-solid fa-lock"></i> Password
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form id="logoutForm" class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="btn btn-link">
+                                    <i class="fa-solid fa-sign-out-alt"></i> Sign out
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            }
+        }
+        else
+        {
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                     <a class="btn btn-primary" id="login" asp-area="Identity" asp-page="/Account/Login">
+                        <i class="fa-solid fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+            </ul>
+        }
+    }
+</ul>

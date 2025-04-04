@@ -1,0 +1,77 @@
+/* Ensures nav-link color is white */
+.navbar-nav .nav-link[b-cclcxt1ffh] {
+    color: #ffffff !important; /* Force white color */
+}
+
+/* Ensures active state link color is white */
+.nav-pills .nav-link.active[b-cclcxt1ffh],
+.nav-pills .show > .nav-link[b-cclcxt1ffh] {
+    color: #ffffff !important; /* Force white color for active links */
+    background-color: #1b6ec2; /* Background color for active link */
+    border-color: #1861ac; /* Border color for active link */
+}
+
+/* Ensures active nav-item border color is white */
+.nav-item.active[b-cclcxt1ffh] {
+    border: 3px solid #fff !important; /* White border for active nav items */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+.background-wrapper[b-cclcxt1ffh] {
+    min-height: calc(100vh - (header height + footer height)); /* Adjust to fit your layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Additional CSS to ensure all anchor tags have white color */
+a.navbar-brand[b-cclcxt1ffh] {
+    color: #ffffff !important; /* White color for brand */
+}
+
+a[b-cclcxt1ffh] {
+    color: #ffffff !important; /* White color for all anchor tags */
+}
+
+.business-logo[b-cclcxt1ffh] {
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}
+
+.slogan[b-cclcxt1ffh] {
+    font-size: 1rem; /* Adjust font size as needed */
+    color: #ffffff; /* Adjust color as needed */
+    margin-left: 50px; /* Move the slogan to the right */
+}
+
+/* Other CSS styles */
+.btn-primary[b-cclcxt1ffh] {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top[b-cclcxt1ffh] {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom[b-cclcxt1ffh] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-cclcxt1ffh] {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-cclcxt1ffh] {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer[b-cclcxt1ffh] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}

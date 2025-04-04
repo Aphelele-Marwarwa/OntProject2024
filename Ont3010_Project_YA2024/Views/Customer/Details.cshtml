@@ -1,0 +1,238 @@
+﻿@model Ont3010_Project_YA2024.Models.CustomerLiaison.Customer
+
+@{
+    ViewData["Title"] = "Customer Details";
+    Layout = ViewData["Layout"] as string;
+}
+
+@if (TempData["Error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="customer-details-container">
+    <h1 class="text-center text-primary mb-4">Customer Details</h1>
+    <hr class="border-primary" />
+
+    <div class="row">
+        <!-- Profile Photo -->
+        <div class="col-md-3 text-center mb-4">
+            <div class="profile-photo-container mb-3">
+                @if (Model.ProfilePhoto != null && Model.ProfilePhoto.Length > 0)
+                {
+                    var base64String = Convert.ToBase64String(Model.ProfilePhoto);
+                    var imgSrc = $"data:image/png;base64,{base64String}";
+                    <img src="@imgSrc" class="img-fluid rounded-circle" alt="Profile Photo" />
+                }
+                else
+                {
+                    <img src="~/images/adminIcons/Profile.png" class="img-fluid rounded-circle" alt="Default Profile Photo" />
+                }
+            </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="col-md-9">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    Personal Information
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.LastName)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.LastName)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Title)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Title)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.EmailAddress)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmailAddress)</dd>
+
+                        <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.PhoneNumber)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PhoneNumber)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            Business Information
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.BusinessRole)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BusinessRole)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.BusinessName)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BusinessName)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.BusinessEmailAddress)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BusinessEmailAddress)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.BusinessPhoneNumber)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BusinessPhoneNumber)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.BusinessType)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BusinessType)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Industry)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Industry)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Address Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+          Business  Address Information
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.StreetAddress)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.StreetAddress)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.City)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.City)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.PostalCode)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.PostalCode)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Province)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Province)</dd>
+
+                <dt class="col-sm-4 fw-bold">@Html.DisplayNameFor(model => model.Country)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Country)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Audit Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            Audit Information
+        </div>
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4 fw-bold">Created By</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.CreatedBy)</dd>
+
+                <dt class="col-sm-4 fw-bold">Created Date</dt>
+                <dd class="col-sm-8">@Model.CreatedDate.ToString("g")</dd>
+
+                <dt class="col-sm-4 fw-bold">Last Modified By</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.ModifiedBy)</dd>
+
+                <dt class="col-sm-4 fw-bold">Last Modified Date</dt>
+                <dd class="col-sm-8">@Model.ModifiedDate?.ToString("g")</dd>
+            </dl>
+        </div>
+    </div>
+    <!-- Fridge Allocations -->
+    @if (Model.FridgeAllocations.Any())
+    {
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                Fridge Allocations
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    @foreach (var fridgeAllocation in Model.FridgeAllocations)
+                    {
+                        <dt class="col-sm-4 fw-bold">Created By</dt>
+                        <dd class="col-sm-8">@fridgeAllocation.CreatedBy</dd>
+
+                        <dt class="col-sm-4 fw-bold">Created Date</dt>
+                        <dd class="col-sm-8">@fridgeAllocation.CreatedDate.ToString("g")</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    }
+
+
+    <!-- Process Allocations -->
+    @if (Model.ProcessAllocations.Any())
+    {
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                Process Allocations
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    @foreach (var processAllocation in Model.ProcessAllocations)
+                    {
+                        <dt class="col-sm-4 fw-bold">Last Modified By</dt>
+                        <dd class="col-sm-8">@processAllocation.LastModifiedBy</dd>
+
+                        <dt class="col-sm-4 fw-bold">Last Modified Date</dt>
+                        <dd class="col-sm-8">@processAllocation.LastModifiedDate?.ToString("g")</dd>
+                    }
+                </dl>
+            </div>
+        </div>
+    }
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.CustomerId" class="btn btn-primary mx-2">Edit</a>
+        <a asp-action="Index" class="btn btn-secondary mx-2">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#errorMessage").fadeOut('slow');
+        }, 3000);
+    });
+</script>
+
+<style>
+    .customer-details-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .profile-photo-container img {
+        max-height: 150px;
+        border: 2px solid #007bff;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+</style>

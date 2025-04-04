@@ -1,0 +1,234 @@
+﻿@model Employee
+@using Ont3010_Project_YA2024.Models.admin
+
+@{
+    ViewData["Title"] = "Create Employee";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@if (TempData["Error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger fade show" role="alert">
+        @TempData["Error"]
+    </div>
+}
+<div class="employee-details-container">
+    <h1 class="mt-4"><i class="fas fa-user-plus"></i>Create Employee</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
+                    </div>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                        </div>
+                        <select asp-for="Title" class="form-control">
+                            <option value="">Select Title</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Dr.">Dr.</option>
+                            <option value="Prof.">Prof.</option>
+                            <option value="Rev.">Rev.</option>
+                            <option value="Hon.">Hon.</option>
+                            <option value="Sir">Sir</option>
+                            <option value="Lady">Lady</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input asp-for="Email" class="form-control" placeholder="Enter Email Address" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        </div>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+                    </div>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Role" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                        </div>
+                        <select asp-for="Role" class="form-control">
+                            <option value="">Select Role</option>
+                            <option value="Administrator">Administrator</option>
+                            <option value="Customer Liaison">Customer Liaison</option>
+                            <option value="Inventory Liaison">Inventory Liaison</option>
+                            <option value="Purchasing Manager">Purchasing Manager</option>
+                            <option value="Maintenance Technician">Maintenance Technician</option>
+                            <option value="Fault Technician">Fault Technician</option>
+                          
+                        </select>
+
+                    </div>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Responsibility" class="control-label"></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-tasks"></i></span>
+                        </div>
+                        <textarea asp-for="Responsibility" class="form-control" placeholder="Enter Responsibilities" rows="4"></textarea>
+                    </div>
+                    <span asp-validation-for="Responsibility" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProfilePhoto" class="control-label"></label>
+                    <input type="file" asp-for="ProfilePhoto" class="form-control">
+                    @*   <span asp-validation-for="ProfilePhoto" class="text-danger"></span> *@
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .employee-details-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            padding: .375rem .75rem;
+        }
+
+            .form-control:focus {
+                border-color: #80bdff;
+                box-shadow: 0 0 0 .2rem rgba(38, 143, 255, .25);
+            }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+            .form-group label {
+                font-weight: bold;
+            }
+
+        .input-group-prepend .input-group-text {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: .375rem 1rem;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: .375rem 1rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004ba0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .alert {
+            margin-top: 1rem;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+}

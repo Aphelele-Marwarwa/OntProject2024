@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Ont3010_Project_YA2024.Models.Notification>
+
+@{
+    var loggedInEmployeeId = ViewBag.EmployeeId; // Retrieve logged-in employee's ID from ViewBag
+    ViewData["Title"] = "Employee Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>All Notifications</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Action By</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model)
+        {
+            var status = notification.EmployeeNotificationStatuses
+            .FirstOrDefault(s => s.EmployeeId == loggedInEmployeeId); // Use logged-in employee's ID
+
+            <tr>
+                <td>@notification.Message</td>
+                <td>@notification.ActionBy</td>
+                <td>@notification.Date.ToString("g")</td>
+                <td>
+                    @if (status != null && status.IsRead)
+                    {
+                        <span class="badge bg-success">Read</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Unread</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

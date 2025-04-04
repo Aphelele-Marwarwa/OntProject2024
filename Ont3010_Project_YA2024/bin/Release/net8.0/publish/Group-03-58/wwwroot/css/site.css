@@ -1,0 +1,108 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes full viewport height */
+}
+
+/* Navbar styling to match the footer */
+.navbar {
+    background-color: #042c31;
+    border-bottom: 2px solid #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it is above other content */
+}
+
+/* Navbar link styling */
+.navbar-nav .nav-link {
+    color: #b2dfdb; /* Light Teal Color to match footer links */
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #fff; /* Change the link color on hover */
+    }
+
+.navbar-brand {
+    color: #b2dfdb; /* Match the footer link color */
+}
+
+    .navbar-brand:hover {
+        color: #fff; /* Change the brand color on hover */
+    }
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Main content area */
+.main-content {
+    margin-left: 250px; /* Width of the sidebar */
+    margin-top: 56px; /* Height of the navbar */
+    margin-bottom: 56px; /* Ensure space for the footer */
+    padding: 20px;
+    flex: 1; /* Allow the main content to expand */
+    overflow-y: auto; /* Enable scrolling within the main content */
+    scrollbar-width: none;
+}
+
+/* Footer styling */
+.footer {
+    background-color: #042c31;
+    color: #fff;
+    padding: 10px 0; /* Reduce padding to make footer smaller */
+    text-align: center;
+    border-top: 2px solid #fff;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    height: 50px; /* Set a fixed height for the footer */
+}
+
+    .footer .container {
+        background-color: #042c31; /* Darker background color for the container */
+    }
+    .footer .colot {
+        background-color: #042c31; /* Darker background color for the container */
+    }
+
+    .footer p {
+        margin: 0;
+        font-size: 0.875rem; /* Smaller text size for a more compact look */
+    }
+
+    .footer a {
+        color: #b2dfdb; /* Light Teal Color */
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Media query for responsiveness */
+@media (max-width: 576px) {
+    .footer {
+        height: auto; /* Allow height to grow for smaller screens */
+        padding: 10px 0; /* Reduce padding on smaller screens */
+    }
+
+        .footer .container {
+            padding: 10px; /* Adjust padding for smaller screens */
+        }
+}

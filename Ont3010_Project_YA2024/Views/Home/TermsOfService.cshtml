@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Terms of Service";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+    body {
+        background-color: #f4f7fa;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .terms-container {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 30px;
+        border-radius: 8px;
+        color: white;
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        color: #ffd700; /* Golden color for headings */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    p {
+        color: black;
+     }
+    /* Specify black text color for card-body */
+    .card-body {
+        color: #000000; /* Black text in card body */
+    }
+
+        /* Specify black text color for lists inside card-body */
+        .card-body ul {
+            color: #000000; /* Black text for list items in card body */
+        }
+
+    .contact-info {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    .scroll-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ffd700;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+
+        .scroll-top:hover {
+            background-color: #e0c300;
+        }
+
+    .accordion-button:focus {
+        box-shadow: none;
+    }
+
+    .confirm-acceptance {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+   
+</style>
+
+<div class="terms-container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="accordion" id="termsAccordion">
+        <!-- Section 1: Acceptance of Terms -->
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                         1. Acceptance of Terms
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#termsAccordion">
+                <div class="card-body">
+                    <p>  By accessing or using the Fridge Management System, you agree to be bound by these Terms of Service and our Privacy Policy. We reserve the right to update or modify these terms at any time without prior notice. Your continued use of the system after any changes constitutes acceptance of the new terms.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: User Responsibilities -->
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        2. User Responsibilities
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#termsAccordion">
+                <div class="card-body">
+                    <p>  You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to:</p>
+                    <ul>
+                        <li>Provide accurate and complete information when creating an account.</li>
+                        <li>Notify us immediately of any unauthorized use of your account or any other breach of security.</li>
+                        <li>Take responsibility for all activities that occur under your account.</li>
+                        <li>Use the system in compliance with all applicable laws and regulations.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Prohibited Activities -->
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        3. Prohibited Activities
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#termsAccordion">
+                <div class="card-body">
+                    You agree not to engage in any of the following prohibited activities:
+                    <ul>
+                        <li>Using the system for any unlawful purpose or to promote illegal activities.</li>
+                        <li>Interfering with or disrupting the system or servers.</li>
+                        <li>Attempting to gain unauthorized access to any part of the system or its related systems.</li>
+                        <li>Posting or transmitting any content that is defamatory, obscene, or offensive.</li>
+                        <li>Impersonating any person or entity or falsely stating or misrepresenting your affiliation with any person or entity.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more sections similarly as needed -->
+    </div>
+
+    <div class="contact-info mt-4">
+        <h3>Contact Information</h3>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:@ViewBag.ContactEmail">@ViewBag.ContactEmail</a></li>
+            <li><strong>Address:</strong> <br> @ViewBag.Street <br> @ViewBag.City, @ViewBag.StateProvince <br> @ViewBag.Country</li>
+        </ul>
+    </div>
+
+    <!-- Confirmation button -->
+   @*  <div class="confirm-acceptance">
+        <button type="button" class="btn btn-primary" onclick="confirmAcceptance()">Accept Terms</button>
+    </div> *@
+</div>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+    // Show or hide the scroll-to-top button when the user scrolls down
+    window.onscroll = function () {
+        const scrollButton = document.querySelector('.scroll-top');
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            scrollButton.style.display = "block";
+        } else {
+            scrollButton.style.display = "none";
+        }
+    };
+
+    // Scroll to the top of the page smoothly
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Confirm acceptance prompt
+    function confirmAcceptance() {
+        if (confirm("Do you accept the Terms of Service?")) {
+            alert("Thank you for accepting the terms.");
+        } else {
+            alert("You need to accept the terms to continue using the system.");
+        }
+    }
+</script>

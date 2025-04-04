@@ -1,0 +1,232 @@
+﻿@model Customer
+@using Ont3010_Project_YA2024.Models.CustomerLiaison
+
+@{
+    ViewData["Title"] = "Delete Customer";
+    Layout = ViewData["Layout"] as string;
+}
+@if (TempData["Error"] != null)
+{
+    <div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="customer-details-container">
+<h1 class="text-center text-danger mb-4">Delete Customer</h1>
+<p class="text-center text-danger mb-4">@ViewBag.Message</p>
+<h3 class="text-center mb-4">Are you sure you want to delete this customer?</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h4 class="text-dark mb-4">Customer Details</h4>
+            <div class="bg-light p-4 rounded shadow-sm">
+                    <div class="col-md-4 mb-4 text-center">
+                        <div class="profile-photo-container mb-3">
+                            @if (Model.ProfilePhoto != null && Model.ProfilePhoto.Length > 0)
+                            {
+                                // Convert byte array to Base64 string
+                                var base64String = Convert.ToBase64String(Model.ProfilePhoto);
+                                var imgSrc = $"data:image/png;base64,{base64String}"; // Adjust MIME type if needed
+
+                                <img src="@imgSrc" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" alt="Profile Photo" />
+                            }
+                            else
+                            {
+                                <img src="~/images/adminIcons/Profile.png" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" alt="Default Profile Photo" />
+                            }
+                        </div>
+                        
+                    </div>
+                <dl class="row">
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.Title)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Title)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.EmailAddress)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.EmailAddress)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.PhoneNumber)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.BusinessRole)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BusinessRole)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.BusinessName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BusinessName)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.BusinessEmailAddress)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BusinessEmailAddress)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.BusinessPhoneNumber)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BusinessPhoneNumber)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.BusinessType)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.BusinessType)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.Industry)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Industry)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.StreetAddress)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.StreetAddress)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.City)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.PostalCode)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.PostalCode)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.Province)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Province)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.Country)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Country)
+                    </dd>
+
+                    <dt class="col-sm-4 fw-bold">
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
+                </dl>
+            </div>
+
+            <form asp-action="Delete" method="post" class="text-center mt-4">
+                <input type="hidden" asp-for="CustomerId" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a asp-action="Index" class="btn btn-secondary mx-2">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    // Function to hide TempData messages after 3 seconds
+    $(document).ready(function () {
+        setTimeout(function () {
+            $("#createdMessage, #deletedMessage, #errorMessage").fadeOut();
+        }, 3000);
+    });
+</script>
+<style>
+
+    .customer-details-container {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: .375rem;
+        padding: 10px;
+        margin: 10px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .text - danger {
+        color: #dc3545!important;
+    }
+
+    .btn - danger {
+        background - color: #dc3545;
+        border - color: #dc3545;
+    }
+
+    .btn - secondary {
+        background - color: #6c757d;
+        border - color: #6c757d;
+    }
+
+    .bg - light {
+        background - color: #f8f9fa!important;
+    }
+        
+    .text - dark {
+        color: #212529!important;
+    }
+
+    /* Center text and manage margins */
+    .text - center {
+        text - align: center;
+    }
+
+    .mb - 4 {
+        margin - bottom: 1.5rem;
+    }
+
+    .mt - 4 {
+        margin - top: 1.5rem;
+    }
+
+
+</style>

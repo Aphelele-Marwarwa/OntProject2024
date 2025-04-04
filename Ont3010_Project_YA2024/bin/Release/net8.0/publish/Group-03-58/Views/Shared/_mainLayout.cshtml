@@ -1,0 +1,68 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+@inject BusinessService BusinessService
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] - @ViewBag.BusinessName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom navbar-dark shadow-sm mb-4">
+            <div class="container">
+                <a class="navbar-brand d-flex flex-column align-items-start" >
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.BusinessLogo" alt="Business Logo" class="business-logo">
+                        <div class="d-flex flex-column">
+                            <span>@ViewBag.BusinessName</span>
+                            <span class="slogan">@ViewBag.Slogan</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item ms-3">
+                            <partial name="_LoginPartial" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-4">
+            @RenderBody()
+        </main>
+    </div>
+   
+    <footer class="footer text-center text-muted small">
+        <div class="colot">
+        <div class="container">
+            <p>
+                    &copy; @DateTime.Now.Year @ViewBag.BusinessName.  All rights reserved.<br>
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @if (ViewData["ShowBusinessInfo"] != null && (bool)ViewData["ShowBusinessInfo"])
+    {
+        @await Html.PartialAsync("~/Views/_BusinessInfoPartial.cshtml")
+    }
+</body>
+</html>

@@ -1,0 +1,208 @@
+﻿@model Employee
+@using Ont3010_Project_YA2024.Models.admin
+
+@{
+    ViewData["Title"] = "Employee Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="employee-details-container">
+    <h1 class="text-primary mb-4"><i class="fas fa-user-circle"></i> Employee Details</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 text-center">
+                <div class="profile-photo-container mb-3">
+                    @if (Model.ProfilePhoto != null && Model.ProfilePhoto.Length > 0)
+                    {
+                        // Convert byte array to Base64 string
+                        var base64String = Convert.ToBase64String(Model.ProfilePhoto);
+                        var imgSrc = $"data:image/png;base64,{base64String}"; // Adjust MIME type if needed
+
+                        <img src="@imgSrc" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" alt="Profile Photo" />
+                    }
+                    else
+                    {
+                        <img src="~/images/adminIcons/Profile.png" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" alt="Default Profile Photo" />
+                    }
+                </div>
+                <h3>@Model.FirstName @Model.LastName</h3>
+                <p class="text-muted">@Model.Title</p>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="row">
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-envelope"></i> Email
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.Email)
+                            </dd>
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-phone"></i> Phone
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.PhoneNumber)
+                            </dd>
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-briefcase"></i> Role
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.Role)
+                            </dd>
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-calendar-day"></i> Date of Hire
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Model.DateOfHire.ToShortDateString()
+                            </dd>
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-tasks"></i> Responsibility
+                            </dt>
+                            <dd class="col-sm-8">
+                                @Html.DisplayFor(model => model.Responsibility)
+                            </dd>
+
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-check-circle"></i> Status
+                            </dt>
+
+                            <dd class="col-sm-8">
+                                <i class="fas @(Model.IsDeleted ? "fa-times-circle text-danger" : "fa-check-circle text-success")"></i>
+                                @(Model.IsDeleted ? "Deleted" : "Active")
+                            </dd>
+
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-user"></i> Last Modified by
+                            </dt>
+                            <dd class="col-sm-8">
+                                @if (string.IsNullOrEmpty(Model.ModifiedBy))
+                                {
+                                    <span>Not yet modified</span>
+                                }
+                                else
+                                {
+                                    <span>@ViewBag.ModifiedByFirstName @ViewBag.ModifiedByLastName</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4 font-weight-bold">
+                                <i class="fas fa-calendar-day"></i> Last Modified Date
+                            </dt>
+                            <dd class="col-sm-8">
+                                @if (Model.ModifiedDate == null || Model.ModifiedDate == default(DateTime))
+                                {
+                                    <span>Not yet modified</span>
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(model => model.ModifiedDate)
+                                }
+                            </dd>
+                            @*  <dt class="col-sm-4 font-weight-bold">
+                            <i class="fas fa-lock"></i> Password
+                            </dt>
+                            <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Password)
+                            </dd> *@
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-group mt-4">
+            @if (Model.IsDeleted)
+            {
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            }
+            else
+            {
+                <a asp-action="Edit" asp-route-id="@Model?.EmployeeId" class="btn btn-primary">
+                    <i class="fas fa-user-edit"></i> Edit
+                </a>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .employee-details-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: .375rem;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .text-primary {
+            color: #007bff;
+        }
+
+        .profile-photo-container {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border-radius: .375rem;
+            border: 1px solid #ced4da;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        .font-weight-bold {
+            font-weight: bold;
+        }
+    </style>
+}

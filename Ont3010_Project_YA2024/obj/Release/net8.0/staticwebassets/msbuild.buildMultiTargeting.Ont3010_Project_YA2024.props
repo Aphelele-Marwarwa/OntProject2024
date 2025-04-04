@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Ont3010_Project_YA2024.props" />
+</Project>

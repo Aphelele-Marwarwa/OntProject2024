@@ -1,0 +1,225 @@
+﻿@page
+@model Ont3010_Project_YA2024.Areas.Identity.Pages.Account.Manage.PersonalDataModel
+
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+
+
+<div class="card shadow-lg mb-5">
+    <div class="card-header text-white bg-primary d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Personal Information</h4>
+
+
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-controller="Employee" asp-action="Edit" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-light btn-sm">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+        }
+        else if (User.IsInRole("Customer"))
+        {
+            <a asp-controller="updateCustomer" asp-action="edit" asp-route-id="@Model.Customer.CustomerId" class="btn btn-light btn-sm">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+        }
+        else
+        {
+            <a asp-controller="EditProfile" asp-action="EditProfile" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-light btn-sm">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+        }
+    </div>
+    <div class="card-body">
+        <div class="profile-photo text-center mb-4">
+            @if (Model.Employee?.ProfilePhoto != null && Model.Employee.ProfilePhoto.Length > 0)
+            {
+                // Convert byte array to Base64 string
+                var base64String = Convert.ToBase64String(Model.Employee.ProfilePhoto);
+                var imgSrc = $"data:image/png;base64,{base64String}";
+                <img src="@imgSrc" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px;" alt="Profile Photo" />
+            }
+            else if (Model.Customer?.ProfilePhoto != null && Model.Customer.ProfilePhoto.Length > 0)
+            {
+                var base64String = Convert.ToBase64String(Model.Customer.ProfilePhoto);
+                var imgSrc = $"data:image/png;base64,{base64String}";
+                <img src="@imgSrc" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px;" alt="Profile Photo" />
+            }
+            else
+            {
+                <img src="~/images/adminIcons/Profile.png" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px;" alt="Default Profile Photo" />
+            }
+        </div>
+
+        <dl class="row mb-4">
+            <dl class="row mb-4">
+                @if (User.IsInRole("Administrator") ||
+                User.IsInRole("Customer Liaison") ||
+                User.IsInRole("Inventory Liaison") ||
+                User.IsInRole("Purchasing Manager") ||
+                User.IsInRole("Maintenance Technician") ||
+                User.IsInRole("Fault Technician"))
+                {
+                <dt class="col-sm-4">First Name</dt>
+                <dd class="col-sm-8">@Model.Employee.FirstName</dd>
+
+                <dt class="col-sm-4">Last Name</dt>
+                <dd class="col-sm-8">@Model.Employee.LastName</dd>
+
+                <dt class="col-sm-4">Email</dt>
+                <dd class="col-sm-8">@Model.Employee.Email</dd>
+
+                <dt class="col-sm-4">Phone Number</dt>
+                <dd class="col-sm-8">@Model.Employee.PhoneNumber</dd>
+
+                <dt class="col-sm-4">Role</dt>
+                <dd class="col-sm-8">@Model.Employee.Role</dd>
+
+                <dt class="col-sm-4">Date of Hire</dt>
+                <dd class="col-sm-8">@Model.Employee.DateOfHire.ToShortDateString()</dd>
+
+                <dt class="col-sm-4">Title</dt>
+                <dd class="col-sm-8">@Model.Employee.Title</dd>
+
+                <dt class="col-sm-4">Responsibility</dt>
+                <dd class="col-sm-8">@Model.Employee.Responsibility</dd>
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                <dt class="col-sm-4">First Name</dt>
+                <dd class="col-sm-8">@Model.Customer.FirstName</dd>
+
+                <dt class="col-sm-4">Last Name</dt>
+                <dd class="col-sm-8">@Model.Customer.LastName</dd>
+
+                <dt class="col-sm-4">Email</dt>
+                <dd class="col-sm-8">@Model.Customer.EmailAddress</dd>
+
+                <dt class="col-sm-4">Phone Number</dt>
+                <dd class="col-sm-8">@Model.Customer.PhoneNumber</dd>
+
+                <dt class="col-sm-4">Business Name</dt>
+                <dd class="col-sm-8">@Model.Customer.BusinessName</dd>
+
+                <dt class="col-sm-4">Street Address</dt>
+                <dd class="col-sm-8">@Model.Customer.StreetAddress</dd>
+
+                <dt class="col-sm-4">City</dt>
+                <dd class="col-sm-8">@Model.Customer.City</dd>
+
+                <dt class="col-sm-4">Postal Code</dt>
+                <dd class="col-sm-8">@Model.Customer.PostalCode</dd>
+
+                <dt class="col-sm-4">Province</dt>
+                <dd class="col-sm-8">@Model.Customer.Province</dd>
+
+                <dt class="col-sm-4">Country</dt>
+                <dd class="col-sm-8">@Model.Customer.Country</dd>
+            }
+        </dl>
+
+        <div class="button-group d-flex justify-content-between">
+            @if (User.IsInRole("Administrator"))
+            {
+                <a asp-controller="Admin" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Customer Liaison"))
+            {
+                <a asp-controller="CustomerLiaison" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Inventory Liaison"))
+            {
+                <a asp-controller="InventoryLiaison" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Purchasing Manager"))
+            {
+                <a asp-controller="PurchasingManager" ))" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                <a asp-controller="CustomerCon" asp-action="Index" asp-route-id="@Model.Customer.CustomerId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Fault Technician"))
+            {
+                <a asp-controller="FaultTechnician" ))" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+            else if (User.IsInRole("Maintenance technician"))
+            {
+                <a asp-controller="Maintenancetechnician" ))" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            }
+                else if (User.IsInRole("Supplier"))
+                {
+                    <a asp-controller="Supplier" asp-action="Index" asp-route-id="@Model.Employee.EmployeeId" class="btn btn-secondary btn-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .profile-photo img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 3px solid #007bff;
+        }
+
+        .btn-custom {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        dl.row {
+            margin-bottom: 0;
+        }
+
+        dt {
+            font-weight: bold;
+        }
+    </style>
+}

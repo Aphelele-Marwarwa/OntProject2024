@@ -1,0 +1,196 @@
+﻿@model Ont3010_Project_YA2024.Models.InventoryLiaison.Fridge
+
+@{
+    ViewData["Title"] = "Edit Fridge";
+    Layout = ViewData["Layout"] as string;
+}
+@if (TempData["updated"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["updated"]
+    </div>
+}
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["error"]
+    </div>
+}
+<div class="container custom-container">
+<h1 class="text-center custom-title">
+    <i class="fas fa-edit"></i> @ViewData["Title"]
+</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div class="form-group custom-form-group">
+                <input type="hidden" asp-for="FridgeId" />
+                <input type="hidden" asp-for="SerialNumber" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelType" class="control-label"></label>
+                <input asp-for="ModelType" class="form-control custom-form-control" />
+                <span asp-validation-for="ModelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoorType" class="control-label"></label>
+                <input asp-for="DoorType" class="form-control" />
+                <span asp-validation-for="DoorType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <input asp-for="Size" class="form-control" />
+                <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition" class="control-label"></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-cogs"></i></span> <!-- Example icon -->
+                    </div>
+                    <select asp-for="Condition" class="form-control">
+                        <option value="">Select Condition</option>
+                        <option value="New">New</option>
+                        <option value="Used">Used</option>
+                        <option value="Refurbished">Refurbished</option>
+                        <option value="Damaged">Damaged</option>
+                        <option value="In Repair">In Repair</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerialNumber" class="control-label"></label>
+                <input asp-for="SerialNumber" class="form-control custom-form-control" />
+                <span asp-validation-for="SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierName" class="control-label"></label>
+                <input asp-for="SupplierName" class="form-control custom-form-control" />
+                <span asp-validation-for="SupplierName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierContact" class="control-label"></label>
+                <input asp-for="SupplierContact" class="form-control custom-form-control" />
+                <span asp-validation-for="SupplierContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryDocumentation" class="control-label">Delivery Documentation (Optional)</label>
+                <input type="file" name="DeliveryDocumentation" class="form-control" />
+                <span asp-validation-for="DeliveryDocumentation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FridgeImage" class="control-label">Fridge Image (Optional)</label>
+                <input type="file" name="FridgeImage" class="form-control" />
+                <span asp-validation-for="FridgeImage" class="text-danger"></span>
+            </div>
+
+            @if (Model.FridgeImage != null)
+            {
+                <!-- Display existing fridge image -->
+                <div class="form-group">
+                    <label>Existing Fridge Image</label>
+                    <img src="data:image;base64,@Convert.ToBase64String(Model.FridgeImage)" alt="Fridge Image" width="150" />
+                    <input type="hidden" name="existingFridgeImage" value="@Convert.ToBase64String(Model.FridgeImage)" />
+                </div>
+            }
+
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <textarea asp-for="Note" class="form-control custom-form-control"></textarea>
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+
+            <!-- Increased margin to separate buttons from form -->
+            <div class="form-group text-center mt-4">
+                <button type="submit" class="btn btn-primary custom-btn-primary">
+                    <i class="fas fa-save"></i> Edit
+                </button>
+                <a asp-action="Index" class="btn btn-secondary custom-btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Function to hide TempData messages after 3 seconds
+        $(document).ready(function () {
+            setTimeout(function () {
+                $("#createdMessage").fadeOut();
+                $("#deletedMessage").fadeOut();
+                $("#updatedMessage").fadeOut();
+            }, 3000);
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .custom-container {
+            max-width: 900px; /* Increased width for better layout */
+            margin: auto;
+            background-color: #f8f9fa; /* Light background for contrast */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding for space */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .custom-title {
+            color: #ffc107; /* Adjust as needed */
+        }
+
+        .custom-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .custom-form-control {
+            border-radius: 0.25rem;
+        }
+
+        .custom-btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .custom-btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004db3;
+            }
+
+        .custom-btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .custom-btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .fa-edit {
+            color: #ffc107;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+}

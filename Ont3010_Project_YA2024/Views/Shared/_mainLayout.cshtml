@@ -1,0 +1,105 @@
+﻿@using Ont3010_Project_YA2024.Data.Helpers
+@using Ont3010_Project_YA2024.Models.admin
+@inject BusinessService BusinessService
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="@ViewBag.BusinessLogo" type="image/x-icon" />
+    <title>@ViewData["Title"] - @ViewBag.BusinessName</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ont3010_Project_YA2024.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom navbar-dark shadow-sm mb-4">
+            <div class="container">
+                <a class="navbar-brand d-flex flex-column align-items-start" >
+                    <div class="d-flex align-items-center">
+                        <img src="@ViewBag.BusinessLogo" alt="Business Logo" class="business-logo">
+                        <div class="d-flex flex-column">
+                            <span>@ViewBag.BusinessName</span>
+                            <span class="slogan">@ViewBag.Slogan</span>
+                        </div>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNav">
+                    <partial name="_LoginPartial.cshtml"></partial>
+                    @{
+                        // Cast ViewBag.Notifications to a list of EmployeeNotificationStatus
+                        var notifications = ViewBag.Notifications as List<Ont3010_Project_YA2024.Data.Notifications.EmployeeNotificationStatus>;
+                    }
+
+                    <!-- Notification Bell -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle notification-bell" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger">@ViewBag.UnreadNotificationCount</span> <!-- Unread notifications count -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            @if (notifications != null && notifications.Any()) // Check if there are notifications
+                            {
+                                foreach (var notificationStatus in notifications) // Iterate over the EmployeeNotificationStatus objects
+                                {
+                                    var notification = notificationStatus.Notification; // Access the Notification object
+                                    <li>
+                                        <a class="dropdown-item"
+                                           style="color: @(notificationStatus.IsRead ? "gray" : "white");"
+                                           href="@Url.Action("MarkAsRead", new { id = notification.Id })">
+                                            @notification.Message by @notification.ActionBy <br />
+                                            <small style="color: gray;">@notification.Date.ToString("g")</small>
+                                        </a>
+                                    </li>
+                                }
+                                <li><hr class="dropdown-divider"></li>
+                                <!-- "View All" link that directs to a full notification page -->
+                                <li>
+                                    <a class="dropdown-item text-center" href="@Url.Action("AllNotifications", "Notifications")">View All Notifications</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="dropdown-item" style="color: white;" href="#">No notifications available</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-4">
+            @RenderBody()
+        </main>
+    </div>
+   
+    <footer class="footer text-center text-muted small">
+        <div class="colot">
+        <div class="container">
+            <p>
+                    &copy; @DateTime.Now.Year @ViewBag.BusinessName.  All rights reserved.<br>
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @if (ViewData["ShowBusinessInfo"] != null && (bool)ViewData["ShowBusinessInfo"])
+    {
+        @await Html.PartialAsync("~/Views/_BusinessInfoPartial.cshtml")
+    }
+</body>
+</html>
